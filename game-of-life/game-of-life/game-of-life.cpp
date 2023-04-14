@@ -1,6 +1,14 @@
 #include <iostream>
 
+
+#include "GameController.h"
+
+
 int main()
 {
-    std::cout << "Hello World!\n";
+	GameController gameController = GameController();
+	
+	gameController.runGame();
+	
+	return 0;
 }

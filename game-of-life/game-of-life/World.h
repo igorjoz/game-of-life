@@ -5,9 +5,10 @@
 
 
 #include "Organism.h"
+#include "Point.h"
 
 
-int const WORLD_SIZE = 80;
+int const WORLD_SIZE = 10;
 
 
 class World
@@ -21,5 +22,12 @@ public:
 
 	void drawWorld();
 	void takeTurn();
+
+	void move(Point position, Point destination);
+	void remove(Point position);
+
+	bool isEmpty(Point position);
+
+	Point getRandomNeighbour(const Point& position) const;
 };
 

@@ -41,3 +41,40 @@ void World::drawWorld() {
 
 void World::takeTurn() {
 }
+
+
+void World::move(Point position, Point destination) {
+	organisms[destination.x][destination.y] = organisms[position.x][position.y];
+	organisms[position.x][position.y] = nullptr;
+}
+
+
+void World::remove(Point position) {
+	if (organisms[position.x][position.y] != nullptr) {
+		delete organisms[position.x][position.y];
+		organisms[position.x][position.y] = nullptr;
+	}
+}
+
+
+bool World::isEmpty(Point position) {
+	return organisms[position.x][position.y] == nullptr;
+}
+
+
+Point World::getRandomNeighbour(const Point& position) const {
+	int random = rand() % 4;
+
+	switch (random) {
+	case 0:
+		return Point(position.x, position.y - 1);
+	case 1:
+		return Point(position.x, position.y + 1);
+	case 2:
+		return Point(position.x - 1, position.y);
+	case 3:
+		return Point(position.x + 1, position.y);
+	default:
+		return Point(0, 0);
+	}
+}

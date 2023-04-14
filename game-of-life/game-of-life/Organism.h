@@ -9,7 +9,7 @@ class World;
 
 class Organism
 {
-private:
+protected:
 	int strength;
 	int initiative;
 	int age;
@@ -25,7 +25,7 @@ public:
 	virtual ~Organism();
 
 	virtual void action() = 0;
-	virtual bool collision(Organism* other) = 0;
+	virtual bool collision(Organism& other) = 0;
 	virtual void draw() = 0;
 
 	int getStrength() const;

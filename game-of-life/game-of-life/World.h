@@ -20,8 +20,10 @@ public:
 	World();
 	~World();
 
-	void drawWorld();
 	void takeTurn();
+	
+	void drawWorld();
+	void drawHorizontalBorder();
 
 	void move(Point position, Point destination);
 	void remove(Point position);

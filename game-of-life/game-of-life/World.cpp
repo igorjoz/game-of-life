@@ -24,18 +24,31 @@ World::~World() {
 void World::drawWorld() {
 	system("cls");
 
+	drawHorizontalBorder();
+	
 	for (int i = 0; i < WORLD_SIZE; i++) {
+		std::cout << "#";
 		for (int j = 0; j < WORLD_SIZE; j++) {
 			if (organisms[i][j] != nullptr) {
 				std::cout << organisms[i][j]->getSymbol();
 			}
-			else {
-				std::cout << " ";
-			}
+			//else {
+			//	//std::cout << " ";
+			//	std::cout << (i + 1)(j + 1);
+			//}
 		}
-
-		std::cout << std::endl;
+		std::cout << "#" << std::endl;
 	}
+
+	drawHorizontalBorder();
+}
+
+
+void World::drawHorizontalBorder() {
+	for (int i = 0; i < WORLD_SIZE + 2; i++) {
+		std::cout << "#";
+	}
+	std::cout << std::endl;
 }
 
 

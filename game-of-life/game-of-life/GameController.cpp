@@ -13,14 +13,9 @@ GameController::~GameController() {
 
 
 void GameController::runGame() {
-	// press 'q' to quit
 	std::cout << "Press 'q' to quit" << std::endl;
-	// cout isRunning
-	std::cout << "isRunning: " << isRunning << std::endl;
 
 	while (isRunning) {
-		// get user input
-		
 		char playerInput = _getch();
 
 		if (playerInput == 'q') {

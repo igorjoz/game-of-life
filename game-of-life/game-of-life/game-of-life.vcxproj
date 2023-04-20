@@ -132,6 +132,7 @@
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Organism.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="PredatorAnimal.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Organism.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="PredatorAnimal.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -130,6 +130,7 @@
     <ClCompile Include="Animal.cpp" />
     <ClCompile Include="game-of-life.cpp" />
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="Human.cpp" />
     <ClCompile Include="Organism.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="PredatorAnimal.cpp" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="Animal.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="Human.h" />
     <ClInclude Include="Organism.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PredatorAnimal.h" />

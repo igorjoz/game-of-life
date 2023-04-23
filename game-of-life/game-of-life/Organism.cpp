@@ -5,6 +5,7 @@ Organism::Organism(World& world) :
 	strength{ 0 },
 	initiative{ 0 },
 	age{ 0 },
+	symbol{ 'N' },
 	position{ Point(0, 0) },
 	world(world) {
 }

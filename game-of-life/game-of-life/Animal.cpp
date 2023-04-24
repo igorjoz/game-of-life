@@ -49,7 +49,21 @@ void Animal::reproduce(const Point& position) {
 
 
 bool Animal::canMoveTo(const Point& destination) const {
-	return world.isEmpty(destination);
+	bool canMoveTo = world.isEmpty(destination);
+
+	/*if (canMoveTo) {
+		Organism* other = world.getOrganism(destination);
+		if (other != nullptr) {
+			canMoveTo = canEat(*other);
+		}
+	}*/
+
+	// check coordinates
+	if (destination.x < 0 or destination.x >= WORLD_SIZE or destination.y < 0 or destination.y >= WORLD_SIZE) {
+		canMoveTo = false;
+	}
+	
+	return canMoveTo;
 }
 
 

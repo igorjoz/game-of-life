@@ -60,6 +60,16 @@ Point& Organism::getPosition() {
 }
 
 
+int Organism::getX() const {
+	return position.x;
+}
+
+
+int Organism::getY() const {
+	return position.y;
+}
+
+
 void Organism::setPosition(int x, int y) {
 	position.x = x;
 	position.y = y;

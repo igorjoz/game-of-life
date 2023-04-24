@@ -5,9 +5,6 @@
 #include "Animal.h"
 
 
-//class Animal;
-
-
 class PredatorAnimal : public Animal
 {
 public:

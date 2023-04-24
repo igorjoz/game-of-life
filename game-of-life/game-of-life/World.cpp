@@ -30,8 +30,8 @@ void World::drawWorld() {
 		std::cout << "# ";
 
 		for (int j = 0; j < WORLD_SIZE; j++) {
-			if (organisms[i][j] != nullptr) {
-				std::cout << organisms[i][j]->getSymbol() << " ";
+			if (organisms[j][i] != nullptr) {
+				std::cout << organisms[j][i]->getSymbol() << " ";
 			}
 			else {
 				std::cout << "  ";
@@ -99,7 +99,7 @@ void World::move(Point position, Point destination) {
 		return;
 	}
 
-	if (destination.x < 0 or destination.x >= WORLD_SIZE or destination.y < 0 or destination.y >= WORLD_SIZE) {
+	if (isWithinBoardBoundaries(destination) == false) {
 		std::cerr << "Cannot move to destination - out of bounds\n";
 		
 		return;
@@ -119,56 +119,88 @@ void World::remove(Point position) {
 
 
 void World::movePlayerUp() {
+	if (isWithinBoardBoundaries(playerPosition.x, playerPosition.y - 1) == false) {
+		std::cerr << "Cannot move to destination - out of bounds\n";
+
+		return;
+	}
+	
 	if (organisms[playerPosition.x][playerPosition.y - 1] != nullptr) {
 		//organisms[playerPosition.x][playerPosition.y - 1]->interact();
-	}
-	else {
-		move(playerPosition, Point(playerPosition.x, playerPosition.y - 1));
 
-		setPlayerPosition(playerPosition.x, playerPosition.y - 1);
+		return;
 	}
+	
+	move(playerPosition, Point(playerPosition.x, playerPosition.y - 1));
+
+	setPlayerPosition(playerPosition.x, playerPosition.y - 1);
 }
 
 
 void World::movePlayerDown() {
+	if (isWithinBoardBoundaries(playerPosition.x, playerPosition.y + 1) == false) {
+		std::cerr << "Cannot move to destination - out of bounds\n";
+
+		return;
+	}
+	
 	if (organisms[playerPosition.x][playerPosition.y + 1] != nullptr) {
 		//organisms[playerPosition.x][playerPosition.y + 1]->interact();
-	}
-	else {
-		move(playerPosition, Point(playerPosition.x, playerPosition.y + 1));
 
-		setPlayerPosition(playerPosition.x, playerPosition.y + 1);
+		return;
 	}
+	
+	move(playerPosition, Point(playerPosition.x, playerPosition.y + 1));
+
+	setPlayerPosition(playerPosition.x, playerPosition.y + 1);
 }
 
 
 void World::movePlayerLeft() {
-	if (organisms[playerPosition.x - 1][playerPosition.y] != nullptr) {
-		//organisms[playerPosition.x - 1][playerPosition.y]->interact();
-	}
-	else {
-		move(playerPosition, Point(playerPosition.x - 1, playerPosition.y));
-		// set player position
+	if (isWithinBoardBoundaries(playerPosition.x - 1, playerPosition.y) == false) {
+		std::cerr << "Cannot move to destination - out of bounds\n";
 
-		setPlayerPosition(playerPosition.x - 1, playerPosition.y);
+		return;
 	}
+	
+	move(playerPosition, Point(playerPosition.x - 1, playerPosition.y));
+	// set player position
+
+	setPlayerPosition(playerPosition.x - 1, playerPosition.y);
 }
 
 
 void World::movePlayerRight() {
+	if (isWithinBoardBoundaries(playerPosition.x + 1, playerPosition.y) == false) {
+		std::cerr << "Cannot move to destination - out of bounds\n";
+
+		return;
+	}
+
 	if (organisms[playerPosition.x + 1][playerPosition.y] != nullptr) {
 		//organisms[playerPosition.x + 1][playerPosition.y]->interact();
-	}
-	else {
-		move(playerPosition, Point(playerPosition.x + 1, playerPosition.y));
 
-		setPlayerPosition(playerPosition.x + 1, playerPosition.y);
+		return;
 	}
+	
+	move(playerPosition, Point(playerPosition.x + 1, playerPosition.y));
+
+	setPlayerPosition(playerPosition.x + 1, playerPosition.y);
 }
 
 
 bool World::isEmpty(Point position) {
 	return organisms[position.x][position.y] == nullptr;
+}
+
+
+bool World::isWithinBoardBoundaries(Point position) {
+	return position.x >= 0 and position.x < WORLD_SIZE and position.y >= 0 and position.y < WORLD_SIZE;
+}
+
+
+bool World::isWithinBoardBoundaries(int x, int y) {
+	return x >= 0 and x < WORLD_SIZE and y >= 0 and y < WORLD_SIZE;
 }
 
 

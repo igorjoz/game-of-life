@@ -37,6 +37,8 @@ public:
 	void movePlayerRight();
 
 	bool isEmpty(Point position);
+	bool isWithinBoardBoundaries(Point position);
+	bool isWithinBoardBoundaries(int x, int y);
 
 	Point getRandomNeighbour(const Point& position) const;
 

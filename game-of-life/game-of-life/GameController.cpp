@@ -44,7 +44,7 @@ void GameController::takeTurn() {
 
 
 void GameController::spawnInitialOrganisms() {
-	//createHuman();
+	createHuman();
 }
 
 
@@ -68,27 +68,32 @@ void GameController::getInputFromPlayer() {
 
 void GameController::handlePlayerInput() {	
 	switch (playerInput) {
-		case 'q': {
+		case 'q':
+		case ESC: {
 			isRunning = false;
 			break;
 		}
 
-		case 'w': {
+		case 'w':
+		case ARROW_UP: {
 			world->movePlayerUp();
 			break;
 		}
 
-		case 's': {
+		case 's':
+		case ARROW_DOWN: {
 			world->movePlayerDown();
 			break;
 		}
 
-		case 'a': {
+		case 'a':
+		case ARROW_LEFT: {
 			world->movePlayerLeft();
 			break;
 		}
 
-		case 'd': {
+		case 'd':
+		case ARROW_RIGHT: {
 			world->movePlayerRight();
 			break;
 		}
@@ -102,7 +107,7 @@ void GameController::handlePlayerInput() {
 
 void GameController::printWelcomeMessage() {
 		std::cout << "Welcome to the Game of Life!\n";
-		std::cout << "Author: Igor Jozefowicz\n";
+		std::cout << "Author: Igor Jozefowicz, 193257\n";
 		std::cout << "----------------\n\n";
 
 		std::cout << "Controls:\n";

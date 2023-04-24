@@ -58,3 +58,14 @@ char Organism::getSymbol() const {
 Point& Organism::getPosition() {
 	return position;
 }
+
+
+void Organism::setPosition(int x, int y) {
+	position.x = x;
+	position.y = y;
+}
+
+
+void Organism::setPosition(Point& position) {
+	this->position = position;
+}

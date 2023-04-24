@@ -33,5 +33,8 @@ public:
 	int getAge() const;
 	char getSymbol() const;
 	Point& getPosition();
+
+	void setPosition(int x, int y);
+	void setPosition(Point& position);
 };
 

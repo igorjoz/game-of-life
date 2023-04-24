@@ -2,12 +2,12 @@
 
 
 Human::Human(const Point& position, World& world) :
-	Animal(5, 4, 'H', position, world) {
+	PredatorAnimal(5, 4, 'H', position, world) {
 }
 
 
 Human::Human(int strength, int initiative, char symbol, const Point& position, World& world) :
-	Animal(strength, initiative, symbol, position, world) {
+	PredatorAnimal(strength, initiative, symbol, position, world) {
 }
 
 

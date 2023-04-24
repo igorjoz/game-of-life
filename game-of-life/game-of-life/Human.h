@@ -1,12 +1,12 @@
 #pragma once
 
 
-#include "Animal.h"
+#include "PredatorAnimal.h"
 
 
-class Human : public Animal
+class Human : public PredatorAnimal
 {
-	public:
+public:
 	Human(const Point& position, World& world);
 	Human(int strength, int initiative, char symbol, const Point& position, World& world);
 	virtual ~Human();
@@ -14,12 +14,12 @@ class Human : public Animal
 	virtual bool collision(Organism& other) override;
 	virtual void draw() override;
 
-	private:
-		void move(const Point& position);
-		void eat(Organism& other);
-		void reproduce(const Point& position);
+private:
+	void move(const Point& position) override;
+	void eat(Organism& other) override;
+	void reproduce(const Point& position) override;
 
-		bool canMoveTo(const Point& destination) const;
-		bool canEat(const Organism& other) const;
+	bool canMoveTo(const Point& destination) const override;
+	bool canEat(const Organism& other) const override;
 };
 

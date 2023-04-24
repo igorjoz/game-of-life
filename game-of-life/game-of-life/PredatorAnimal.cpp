@@ -26,3 +26,33 @@ bool PredatorAnimal::collision(Organism& other) {
 	}
 	return false;
 }
+
+
+void PredatorAnimal::draw() {
+	//world.draw(position, symbol);
+}
+
+
+void PredatorAnimal::move(const Point& position) {
+	Animal::move(position);
+}
+
+
+void PredatorAnimal::eat(Organism& other) {
+	Animal::eat(other);
+}
+
+
+void PredatorAnimal::reproduce(const Point& position) {
+	Animal::reproduce(position);
+}
+
+
+bool PredatorAnimal::canMoveTo(const Point& destination) const {
+	return Animal::canMoveTo(destination);
+}
+
+
+bool PredatorAnimal::canEat(const Organism& other) const {
+	return false;
+}

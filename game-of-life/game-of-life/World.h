@@ -26,7 +26,8 @@ public:
 	void drawHorizontalBorder();
 
 	void spawnOrganism(Organism* organism);
-	void spawnOrganism(Organism* organism, Point position);
+	void setOrganism(Organism* organism, Point position);
+	void createHuman(Organism* organism, Point position);
 	void move(Point position, Point destination);
 	void remove(Point position);
 

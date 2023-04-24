@@ -57,24 +57,54 @@ void World::drawHorizontalBorder() {
 void World::spawnOrganism(Organism* organism) {
 	int x = rand() % WORLD_SIZE;
 	int y = rand() % WORLD_SIZE;
+	
 	while (organisms[x][y] != nullptr) {
 		x = rand() % WORLD_SIZE;
 		y = rand() % WORLD_SIZE;
 	}
+	
 	organisms[x][y] = organism;
-	organisms[x][y]->getPosition().x = x;
-	organisms[x][y]->getPosition().y = y;
+	organisms[x][y]->setPosition(x, y);
 }
 
 
-void World::spawnOrganism(Organism* organism, Point position) {
+void World::setOrganism(Organism* organism, Point position) {
 	organisms[position.x][position.y] = organism;
-	organisms[position.x][position.y]->getPosition().x = position.x;
-	organisms[position.x][position.y]->getPosition().y = position.y;
+	organisms[position.x][position.y]->setPosition(position);
 }
+
+
+void World::createHuman(Organism* human, Point position) {
+	organisms[position.x][position.y] = human;
+	
+	organisms[position.x][position.y]->setPosition(position);
+	setPlayerPosition(position);
+}
+
+
+//void World::spawnOrganism(Organism* organism, Point position) {
+//	organisms[position.x][position.y] = organism;
+//	organisms[position.x][position.y]->setPosition(position);
+//}
 
 
 void World::move(Point position, Point destination) {
+	// check if can move to destination
+	// if not, return
+	
+	if (organisms[destination.x][destination.y] != nullptr) {
+		std::cerr << "Cannot move to destination - already occupied\n";
+		//organisms[position.x][position.y]->interact(organisms[destination.x][destination.y]);
+
+		return;
+	}
+
+	if (destination.x < 0 or destination.x >= WORLD_SIZE or destination.y < 0 or destination.y >= WORLD_SIZE) {
+		std::cerr << "Cannot move to destination - out of bounds\n";
+		
+		return;
+	}
+	
 	organisms[destination.x][destination.y] = organisms[position.x][position.y];
 	organisms[position.x][position.y] = nullptr;
 }
@@ -166,7 +196,6 @@ Point World::getRandomNeighbour(const Point& position) const {
 
 
 void World::printOrganismInfo(Point position) {
-	// print organism info
 	std::cout << "Organism info:" << std::endl;
 	std::cout << "----------------" << std::endl;
 	std::cout << std::endl;
@@ -176,18 +205,15 @@ void World::printOrganismInfo(Point position) {
 
 
 void World::printTurnSummary() {
-	std::cout << std::endl;
-	std::cout << "Turn actions summary:" << std::endl;
-	std::cout << "----------------" << std::endl;
-	std::cout << std::endl;
+	std::cout << "\n";
+	std::cout << "Turn actions summary:\n";
+	std::cout << "----------------\n\n";
 
-	std::cout << "Human position: " << playerPosition.x << ", " << playerPosition.y << std::endl;
+	std::cout << "Human position: (x: " << playerPosition.x << ", y: " << playerPosition.y << ")\n";
 
-	// print organism info for human position
 	if (organisms[playerPosition.x][playerPosition.y] != nullptr) {
-		std::cout << "Organism info:" << std::endl;
-		std::cout << "----------------" << std::endl;
-		std::cout << std::endl;
+		std::cout << "Organism info:\n" << std::endl;
+		std::cout << "----------------\n\n";
 		
 		printOrganismInfo(Point (playerPosition.x, playerPosition.y));
 	}

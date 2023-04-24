@@ -17,7 +17,7 @@ GameController::~GameController() {
 void GameController::runGame() {
 	printWelcomeMessage();
 
-	spawnOrganisms();
+	spawnInitialOrganisms();
 
 	while (isRunning) {
 		getInputFromPlayer();
@@ -43,10 +43,21 @@ void GameController::takeTurn() {
 }
 
 
-void GameController::spawnOrganisms() {
-	Point playerPosition = Point(0, 0);
-	world->spawnOrganism(new Human(5, 4, 'H', playerPosition, *world));
-	world->setPlayerPosition(playerPosition);
+void GameController::spawnInitialOrganisms() {
+	//createHuman();
+}
+
+
+void GameController::spawnOrganism(Organism* organism, Point position) {
+	// TODO: implement
+}
+
+
+void GameController::createHuman() {
+	Point position = Point(0, 0);
+	Human* human = new Human(5, 4, 'H', position, *world);
+	
+	world->createHuman(human, position);
 }
 
 

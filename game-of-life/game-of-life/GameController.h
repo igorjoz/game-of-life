@@ -24,7 +24,9 @@ public:
 	void runGame();
 	void takeTurn();
 
-	void spawnOrganisms();
+	void spawnInitialOrganisms();
+	void spawnOrganism(Organism* organism, Point position);
+	void createHuman();
 
 	void getInputFromPlayer();
 	void handlePlayerInput();

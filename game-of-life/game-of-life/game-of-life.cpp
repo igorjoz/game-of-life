@@ -6,6 +6,8 @@
 
 int main()
 {
+	srand(time(NULL));
+	
 	GameController gameController = GameController();
 	
 	gameController.runGame();

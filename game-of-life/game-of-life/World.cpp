@@ -54,6 +54,15 @@ void World::drawHorizontalBorder() {
 }
 
 
+void World::takeTurn() {
+	sortOrganismsList();
+
+	for (int i = 0; i < organismsList.size(); i++) {
+		organismsList[i]->action();
+	}
+}
+
+
 void World::spawnOrganism(Organism* organism) {
 	int x = rand() % WORLD_SIZE;
 	int y = rand() % WORLD_SIZE;
@@ -65,6 +74,8 @@ void World::spawnOrganism(Organism* organism) {
 	
 	organisms[x][y] = organism;
 	organisms[x][y]->setPosition(x, y);
+
+	organismsList.push_back(organism);
 }
 
 
@@ -79,29 +90,19 @@ void World::createHuman(Organism* human, Point position) {
 	
 	organisms[position.x][position.y]->setPosition(position);
 	setPlayerPosition(position);
+
+	organismsList.push_back(human);
 }
 
 
-//void World::spawnOrganism(Organism* organism, Point position) {
-//	organisms[position.x][position.y] = organism;
-//	organisms[position.x][position.y]->setPosition(position);
-//}
-
-
 void World::move(Point position, Point destination) {
-	// check if can move to destination
-	// if not, return
-	
 	if (organisms[destination.x][destination.y] != nullptr) {
-		std::cerr << "Cannot move to destination - already occupied\n";
-		//organisms[position.x][position.y]->interact(organisms[destination.x][destination.y]);
+		organisms[position.x][position.y]->collision(*organisms[destination.x][destination.y]);
 
 		return;
 	}
 
 	if (isWithinBoardBoundaries(destination) == false) {
-		std::cerr << "Cannot move to destination - out of bounds\n";
-		
 		return;
 	}
 	
@@ -112,6 +113,12 @@ void World::move(Point position, Point destination) {
 
 void World::remove(Point position) {
 	if (organisms[position.x][position.y] != nullptr) {
+		for (int i = 0; i < organismsList.size(); i++) {
+			if (organismsList[i] == organisms[position.x][position.y]) {
+				organismsList.erase(organismsList.begin() + i);
+			}
+		}
+		
 		delete organisms[position.x][position.y];
 		organisms[position.x][position.y] = nullptr;
 	}
@@ -126,7 +133,7 @@ void World::movePlayerUp() {
 	}
 	
 	if (organisms[playerPosition.x][playerPosition.y - 1] != nullptr) {
-		//organisms[playerPosition.x][playerPosition.y - 1]->interact();
+		organisms[playerPosition.x][playerPosition.y - 1]->collision(*organisms[playerPosition.x][playerPosition.y]);
 
 		return;
 	}
@@ -145,7 +152,7 @@ void World::movePlayerDown() {
 	}
 	
 	if (organisms[playerPosition.x][playerPosition.y + 1] != nullptr) {
-		//organisms[playerPosition.x][playerPosition.y + 1]->interact();
+		organisms[playerPosition.x][playerPosition.y + 1]->collision(*organisms[playerPosition.x][playerPosition.y]);
 
 		return;
 	}
@@ -162,9 +169,14 @@ void World::movePlayerLeft() {
 
 		return;
 	}
+
+	if (organisms[playerPosition.x - 1][playerPosition.y] != nullptr) {
+		organisms[playerPosition.x - 1][playerPosition.y]->collision(*organisms[playerPosition.x][playerPosition.y]);
+
+		return;
+	}
 	
 	move(playerPosition, Point(playerPosition.x - 1, playerPosition.y));
-	// set player position
 
 	setPlayerPosition(playerPosition.x - 1, playerPosition.y);
 }
@@ -178,7 +190,7 @@ void World::movePlayerRight() {
 	}
 
 	if (organisms[playerPosition.x + 1][playerPosition.y] != nullptr) {
-		//organisms[playerPosition.x + 1][playerPosition.y]->interact();
+		organisms[playerPosition.x + 1][playerPosition.y]->collision(*organisms[playerPosition.x][playerPosition.y]);
 
 		return;
 	}
@@ -205,9 +217,9 @@ bool World::isWithinBoardBoundaries(int x, int y) {
 
 
 Point World::getRandomNeighbour(const Point& position) const {
-	int random = rand() % 4;
+	int randomNumber = rand() % 4;
 
-	switch (random) {
+	switch (randomNumber) {
 	case 0: {
 		return Point(position.x, position.y - 1);
 	}
@@ -227,12 +239,39 @@ Point World::getRandomNeighbour(const Point& position) const {
 }
 
 
-void World::printOrganismInfo(Point position) {
-	std::cout << "Organism info:" << std::endl;
-	std::cout << "----------------" << std::endl;
-	std::cout << std::endl;
+void World::addTurnSummaryMessage(const std::string& message) {
+	turnSummaryMessages.push_back(message);
+}
 
-	std::cout << "Organism strength: " << organisms[position.x][position.y]->getStrength() << std::endl;
+
+void World::printTurnSummaryMessages() {
+	for (auto message : turnSummaryMessages) {
+		std::cout << message << "\n";
+	}
+
+	turnSummaryMessages.clear();
+}
+
+
+void World::addToOrganismsList(Organism* organism) {
+	organismsList.push_back(organism);
+}
+
+
+void World::sortOrganismsList() {
+	std::sort(organismsList.begin(), organismsList.end(), [](Organism* lhs, Organism* rhs) {
+		return lhs->getInitiative() > rhs->getInitiative();
+		});
+}
+
+
+void World::printOrganismsInfo() {
+	std::cout << "Organisms info:\n";
+	std::cout << "----------------\n\n";
+
+	for (auto organism : organismsList) {
+		organism->printShortInfo();
+	}
 }
 
 
@@ -243,22 +282,19 @@ void World::printTurnSummary() {
 
 	std::cout << "Human position: (x: " << playerPosition.x << ", y: " << playerPosition.y << ")\n";
 
-	if (organisms[playerPosition.x][playerPosition.y] != nullptr) {
-		std::cout << "Organism info:\n" << std::endl;
-		std::cout << "----------------\n\n";
-		
-		printOrganismInfo(Point (playerPosition.x, playerPosition.y));
+	for (auto message : turnSummaryMessages) {
+		std::cout << message << "\n";
 	}
+	turnSummaryMessages.clear();
+
+	printOrganismsInfo();
 }
 
 
 void World::printStatistics() {
-	// TODO: implement
-
-	std::cout << std::endl;
-	std::cout << "World statistics:" << std::endl;
-	std::cout << "----------------" << std::endl;
-	std::cout << std::endl;
+	std::cout << "\n";
+	std::cout << "World statistics:\n";
+	std::cout << "----------------\n\n";
 }
 
 

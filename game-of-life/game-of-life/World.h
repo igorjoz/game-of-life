@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <string>
 
 
 #include "Organism.h"
@@ -17,6 +19,7 @@ class World
 private:
 	Organism* organisms[WORLD_SIZE][WORLD_SIZE];
 	std::vector<Organism*> organismsList;
+	std::vector<std::string> turnSummaryMessages;
 	Point playerPosition;
 
 public:
@@ -26,6 +29,7 @@ public:
 	void drawWorld();
 	void drawHorizontalBorder();
 
+	void takeTurn();
 	void spawnOrganism(Organism* organism);
 	void setOrganism(Organism* organism, Point position);
 	void createHuman(Organism* organism, Point position);
@@ -43,8 +47,14 @@ public:
 
 	Point getRandomNeighbour(const Point& position) const;
 
-	void printOrganismInfo(Point position);
+	void addTurnSummaryMessage(const std::string& message);
+
+	void addToOrganismsList(Organism* organism);
+	void sortOrganismsList();
+
+	void printOrganismsInfo();
 	void printTurnSummary();
+	void printTurnSummaryMessages();
 	void printStatistics();
 
 	Point getPlayerPosition() const;

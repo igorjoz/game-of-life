@@ -2,25 +2,14 @@
 
 
 #include "PredatorAnimal.h"
-
-
-enum SpecialAbility {
-	NO_SPECIAL_ABILITY,
-	ABILITY_SUPER_STRENGTH,
-	ABILITY_SUPER_SPEED,
-	ABILITY_SUPER_IMMUNITY
-};
-
-
-int const HUMAN_STRENGTH = 5;
-int const HUMAN_INITIATIVE = 4;
-char const HUMAN_SYMBOL = 'H';
+#include "Resources.h"
 
 
 class Human : public PredatorAnimal
 {
 private:
 	int specialAbilityCooldown;
+	PlayerAction playerAction;
 
 	void move(const Point& position) override;
 	void eat(Organism& other) override;
@@ -30,6 +19,10 @@ private:
 	bool canEat(const Organism& other) const override;
 	
 public:
+	static const int STRENGTH = 5;
+	static const int INITIATIVE = 4;
+	static const char SYMBOL = 'H';
+	
 	Human(const Point& position, World& world);
 	
 	virtual ~Human();
@@ -37,6 +30,7 @@ public:
 	virtual void action() override;
 	virtual bool collision(Organism& other) override;
 	virtual void draw() override;
+	virtual void die() override;
 
 	void activateSpecialAbility(SpecialAbility specialAbility);
 };

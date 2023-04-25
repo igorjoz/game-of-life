@@ -1,0 +1,19 @@
+#pragma once
+
+
+enum SpecialAbility {
+	NO_SPECIAL_ABILITY,
+	ABILITY_SUPER_STRENGTH,
+	ABILITY_SUPER_SPEED,
+	ABILITY_SUPER_IMMUNITY
+};
+
+
+enum PlayerAction {
+	NONE,
+	MOVE_UP,
+	MOVE_DOWN,
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	USE_SPECIAL_ABILITY
+};

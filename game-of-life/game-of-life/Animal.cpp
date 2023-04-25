@@ -6,6 +6,11 @@ Animal::Animal(int strength, int initiative, char symbol, const Point& position,
 }
 
 
+Animal::Animal(int strength, int initiative, char symbol, World& world) :
+	Organism(strength, initiative, symbol, world) {
+}
+
+
 Animal::~Animal() {
 }
 

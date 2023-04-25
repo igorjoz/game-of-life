@@ -6,6 +6,11 @@ PredatorAnimal::PredatorAnimal(int strength, int initiative, char symbol, const 
 }
 
 
+PredatorAnimal::PredatorAnimal(int strength, int initiative, char symbol, World& world) :
+	Animal(strength, initiative, symbol, world) {
+}
+
+
 PredatorAnimal::~PredatorAnimal() {
 }
 

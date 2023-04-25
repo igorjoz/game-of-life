@@ -22,6 +22,8 @@ public:
 	Organism(World& world);
 	Organism(int strength, int initiative, char symbol, Point position, World& world);
 	Organism(int strength, int initiative, int age, char symbol, Point position, World& world);
+	Organism(int strength, int initiative, char symbol, World& world);
+
 	virtual ~Organism();
 
 	virtual void action() = 0;

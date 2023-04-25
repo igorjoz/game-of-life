@@ -31,6 +31,16 @@ Organism::Organism(int strength, int initiative, int age, char symbol, Point pos
 }
 
 
+Organism::Organism(int strength, int initiative, char symbol, World& world) :
+	strength{ strength },
+	initiative{ initiative },
+	age{ 0 },
+	symbol{ symbol },
+	position{ Point(0, 0) },
+	world{ world } {
+}
+
+
 Organism::~Organism() {
 }
 

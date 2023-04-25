@@ -9,6 +9,8 @@ class PredatorAnimal : public Animal
 {
 public:
 	PredatorAnimal(int strength, int initiative, char symbol, const Point& position, World& world);
+	PredatorAnimal(int strength, int initiative, char symbol, World& world);
+
 	virtual ~PredatorAnimal();
 
 	virtual void action() override;

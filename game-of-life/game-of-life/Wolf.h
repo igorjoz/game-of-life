@@ -4,11 +4,6 @@
 #include "PredatorAnimal.h"
 
 
-int const WOLF_STRENGTH = 9;
-int const WOLF_INITIATIVE = 5;
-char const WOLF_SYMBOL = 'W';
-
-
 class Wolf : public PredatorAnimal
 {
 private:
@@ -20,6 +15,12 @@ private:
 	bool canEat(const Organism& other) const override;*/
 
 public:
+	static const int INITIAL_QUANTITY = 2;
+
+	static const int STRENGTH = 9;
+	static const int INITIATIVE = 5;
+	static const char SYMBOL = 'W';
+	
 	Wolf(const Point& position, World& world);
 	Wolf(World& world);
 	

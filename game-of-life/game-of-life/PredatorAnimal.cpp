@@ -25,12 +25,14 @@ void PredatorAnimal::action() {
 
 
 bool PredatorAnimal::collision(Organism& other) {
-	if (canEat(other)) {
+	return Animal::collision(other);
+
+	/*if (canEat(other)) {
 		eat(other);
 		return true;
 	}
 	
-	return false;
+	return false;*/
 }
 
 

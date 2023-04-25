@@ -28,8 +28,10 @@ public:
 
 	virtual void action() = 0;
 	virtual bool collision(Organism& other) = 0;
+	virtual void reproduce(const Point& position) = 0;
 	virtual void draw() = 0;
-
+	virtual void die() = 0;
+	
 	void printInfo();
 	void printShortInfo();
 

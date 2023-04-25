@@ -20,6 +20,7 @@ protected:
 	virtual void move(const Point& position);
 	virtual void eat(Organism& other);
 	virtual void reproduce(const Point& position);
+	virtual void die();
 
 	virtual bool canMoveTo(const Point& destination) const;
 	virtual bool canEat(const Organism& other) const;

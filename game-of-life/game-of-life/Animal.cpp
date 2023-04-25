@@ -17,20 +17,36 @@ Animal::~Animal() {
 
 void Animal::action() {
 	Point destination = world.getRandomNeighbour(position);
+	
+	if (!world.isWithinBoardBoundaries(destination)) {
+		return;
+	}
+
 	if (canMoveTo(destination)) {
 		move(destination);
+		
+		return;
+	}
+
+
+	if (world.isOccupied(destination)) {
+		Organism* other = world.getOrganismAt(destination);
+
+		/*if (collision(*other)) {
+			return;
+		}*/
 	}
 }
 
 
 bool Animal::collision(Organism& other) {
 	if (canEat(other)) {
-		eat(other);
+		//eat(other);
 		
 		return true;
 	}
 	else {
-		other.collision(*this);
+		//other.collision(*this);
 	}
 	
 	return false;
@@ -44,7 +60,7 @@ void Animal::move(const Point& destination) {
 
 
 void Animal::eat(Organism& other) {
-	world.remove(other.getPosition());
+	other.die();
 
 	std::string message = "Organism " + std::string(1, other.getSymbol()) + " was eaten by " + std::string(1, symbol) + " at (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ")";
 
@@ -57,15 +73,13 @@ void Animal::reproduce(const Point& position) {
 }
 
 
+void Animal::die() {
+	world.remove(position);
+}
+
+
 bool Animal::canMoveTo(const Point& destination) const {
 	bool canMoveTo = world.isEmpty(destination);
-
-	/*if (canMoveTo) {
-		Organism* other = world.getOrganism(destination);
-		if (other != nullptr) {
-			canMoveTo = canEat(*other);
-		}
-	}*/
 
 	if (destination.x < 0 or destination.x >= WORLD_SIZE or destination.y < 0 or destination.y >= WORLD_SIZE) {
 		canMoveTo = false;

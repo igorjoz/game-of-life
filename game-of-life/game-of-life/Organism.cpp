@@ -57,7 +57,7 @@ void Organism::printInfo() {
 
 
 void Organism::printShortInfo() {
-	std::cout << symbol << " (" << position.x << ", " << position.y << ")" << "\n";
+	std::cout << symbol << " (" << position.x << ", " << position.y << ")";
 }
 
 

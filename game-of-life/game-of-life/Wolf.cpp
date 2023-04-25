@@ -2,12 +2,12 @@
 
 
 Wolf::Wolf(const Point& position, World& world) :
-	PredatorAnimal(WOLF_STRENGTH, WOLF_INITIATIVE, WOLF_SYMBOL, position, world) {
+	PredatorAnimal(STRENGTH, INITIATIVE, SYMBOL, position, world) {
 }
 
 
 Wolf::Wolf(World& world) :
-	PredatorAnimal(WOLF_STRENGTH, WOLF_INITIATIVE, WOLF_SYMBOL, world) {
+	PredatorAnimal(STRENGTH, INITIATIVE, SYMBOL, world) {
 }
 
 

@@ -7,6 +7,7 @@
 #include "World.h"
 #include "Human.h"
 #include "Wolf.h"
+#include "Grass.h"
 
 
 // Keys' codes
@@ -35,8 +36,9 @@ public:
 	void takeTurn();
 
 	void spawnInitialOrganisms();
-	void spawnOrganism(Organism* organism, Point position);
 	void createHuman();
+	void spawnWolves();
+	void spawnGrass();
 
 	void getInputFromPlayer();
 	void handlePlayerInput();

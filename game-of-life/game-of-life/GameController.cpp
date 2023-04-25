@@ -19,14 +19,14 @@ void GameController::runGame() {
 
 	spawnInitialOrganisms();
 
-	while (isRunning) {
+	while (isRunning and world->getIsPlayerAlive()) {
 		world->drawWorld();
 		world->printTurnSummary();
 		
 		getInputFromPlayer();
 		handlePlayerInput();
 
-		if (!isRunning) {
+		if (!isRunning or !world->getIsPlayerAlive()) {
 			break;
 		}
 
@@ -47,14 +47,9 @@ void GameController::takeTurn() {
 void GameController::spawnInitialOrganisms() {
 	createHuman();
 
-	//Point wolfPosition = Point(1, 1);
-	Wolf* wolf = new Wolf(*world);
-	world->spawnOrganism(wolf);
-}
-
-
-void GameController::spawnOrganism(Organism* organism, Point position) {
-	// TODO: implement
+	spawnWolves();
+	
+	spawnGrass();
 }
 
 
@@ -62,6 +57,22 @@ void GameController::createHuman() {
 	Point humanPosition = Point(0, 0);
 	Human* human = new Human(humanPosition, *world);
 	world->createHuman(human, humanPosition);
+}
+
+
+void GameController::spawnWolves() {
+	for (int i = 0; i < Wolf::INITIAL_QUANTITY; i++) {
+		Wolf* wolf = new Wolf(*world);
+		world->spawnOrganism(wolf);
+	}
+}
+
+
+void GameController::spawnGrass() {
+	for (int i = 0; i < Grass::INITIAL_QUANTITY; i++) {
+		Grass* grass = new Grass(*world);
+		world->spawnOrganism(grass);
+	}
 }
 
 
@@ -85,25 +96,29 @@ void GameController::handlePlayerInput() {
 
 		case 'w':
 		case ARROW_UP: {
-			world->movePlayerUp();
+			world->setPlayerAction(PlayerAction::MOVE_UP);
+			//world->movePlayerUp();
 			break;
 		}
 
 		case 's':
 		case ARROW_DOWN: {
-			world->movePlayerDown();
+			world->setPlayerAction(PlayerAction::MOVE_DOWN);
+			//world->movePlayerDown();
 			break;
 		}
 
 		case 'a':
 		case ARROW_LEFT: {
-			world->movePlayerLeft();
+			world->setPlayerAction(PlayerAction::MOVE_LEFT);
+			//world->movePlayerLeft();
 			break;
 		}
 
 		case 'd':
 		case ARROW_RIGHT: {
-			world->movePlayerRight();
+			world->setPlayerAction(PlayerAction::MOVE_RIGHT);
+			//world->movePlayerRight();
 			break;
 		}
 

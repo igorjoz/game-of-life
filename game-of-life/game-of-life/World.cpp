@@ -1,7 +1,7 @@
 #include "World.h"
 
 
-World::World() {
+World::World() : isPlayerAlive(true), playerAction(PlayerAction::NONE) {
 	for (int i = 0; i < WORLD_SIZE; i++) {
 		for (int j = 0; j < WORLD_SIZE; j++) {
 			organisms[i][j] = nullptr;
@@ -82,6 +82,8 @@ void World::spawnOrganism(Organism* organism) {
 void World::setOrganism(Organism* organism, Point position) {
 	organisms[position.x][position.y] = organism;
 	organisms[position.x][position.y]->setPosition(position);
+
+	organismsList.push_back(organism);
 }
 
 
@@ -113,22 +115,32 @@ void World::move(Point position, Point destination) {
 
 void World::remove(Point position) {
 	if (organisms[position.x][position.y] != nullptr) {
-		for (int i = 0; i < organismsList.size(); i++) {
-			if (organismsList[i] == organisms[position.x][position.y]) {
-				organismsList.erase(organismsList.begin() + i);
-			}
-		}
-		
 		delete organisms[position.x][position.y];
 		organisms[position.x][position.y] = nullptr;
+	}
+
+	for (int i = 0; i < organismsList.size(); i++) {
+		if (organismsList[i]->getPosition() == position) {
+			organismsList.erase(organismsList.begin() + i);
+		}
 	}
 }
 
 
 void World::movePlayerUp() {
-	if (isWithinBoardBoundaries(playerPosition.x, playerPosition.y - 1) == false) {
-		std::cerr << "Cannot move to destination - out of bounds\n";
+	// find human in organismsList
+	// move human up
+	
+	/*Human* human = nullptr;
+	
+	for (int i = 0; i < organismsList.size(); i++) {
+		if (organismsList[i]->getSymbol() == 'H') {
+			human = (Human*)organismsList[i];
+		}
+	}*/
 
+	
+	if (!isWithinBoardBoundaries(playerPosition.x, playerPosition.y - 1)) {
 		return;
 	}
 	
@@ -206,6 +218,11 @@ bool World::isEmpty(Point position) {
 }
 
 
+bool World::isOccupied(Point position) {
+	return organisms[position.x][position.y] != nullptr;
+}
+
+
 bool World::isWithinBoardBoundaries(Point position) {
 	return position.x >= 0 and position.x < WORLD_SIZE and position.y >= 0 and position.y < WORLD_SIZE;
 }
@@ -213,6 +230,27 @@ bool World::isWithinBoardBoundaries(Point position) {
 
 bool World::isWithinBoardBoundaries(int x, int y) {
 	return x >= 0 and x < WORLD_SIZE and y >= 0 and y < WORLD_SIZE;
+}
+
+
+bool World::hasFreeSpace(Point position) {
+	if (isWithinBoardBoundaries(position.x, position.y - 1) and organisms[position.x][position.y - 1] == nullptr) {
+		return true;
+	}
+
+	if (isWithinBoardBoundaries(position.x, position.y + 1) and organisms[position.x][position.y + 1] == nullptr) {
+		return true;
+	}
+
+	if (isWithinBoardBoundaries(position.x - 1, position.y) and organisms[position.x - 1][position.y] == nullptr) {
+		return true;
+	}
+
+	if (isWithinBoardBoundaries(position.x + 1, position.y) and organisms[position.x + 1][position.y] == nullptr) {
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -239,6 +277,38 @@ Point World::getRandomNeighbour(const Point& position) const {
 }
 
 
+Point World::getRandomFreeSpaceAround(const Point& position) const {
+	std::vector<Point> freeSpaces;
+
+	int x = position.x;
+	int y = position.y;
+
+	if (isWithinBoardBoundaries(x, y - 1) and organisms[x][y - 1] == nullptr) {
+		freeSpaces.push_back(Point(position.x, position.y - 1));
+	}
+
+	if (isWithinBoardBoundaries(position.x, position.y + 1) and organisms[position.x][position.y + 1] == nullptr) {
+		freeSpaces.push_back(Point(position.x, position.y + 1));
+	}
+
+	if (isWithinBoardBoundaries(position.x - 1, position.y) and organisms[position.x - 1][position.y] == nullptr) {
+		freeSpaces.push_back(Point(position.x - 1, position.y));
+	}
+
+	if (isWithinBoardBoundaries(position.x + 1, position.y) and organisms[position.x + 1][position.y] == nullptr) {
+		freeSpaces.push_back(Point(position.x + 1, position.y));
+	}
+
+	if (freeSpaces.size() == 0) {
+		return Point(-1, -1);
+	}
+
+	int randomNumber = rand() % freeSpaces.size();
+
+	return freeSpaces[randomNumber];
+}
+
+
 void World::addTurnSummaryMessage(const std::string& message) {
 	turnSummaryMessages.push_back(message);
 }
@@ -259,9 +329,16 @@ void World::addToOrganismsList(Organism* organism) {
 
 
 void World::sortOrganismsList() {
-	std::sort(organismsList.begin(), organismsList.end(), [](Organism* lhs, Organism* rhs) {
-		return lhs->getInitiative() > rhs->getInitiative();
-		});
+	std::sort(organismsList.begin(), organismsList.end(), &World::compareOrganismsByInitiativeAndAge);
+}
+
+
+bool World::compareOrganismsByInitiativeAndAge(Organism* lhs, Organism* rhs) {
+	if (lhs->getInitiative() == rhs->getInitiative()) {
+		return lhs->getAge() > rhs->getAge();
+	}
+
+	return lhs->getInitiative() > rhs->getInitiative();
 }
 
 
@@ -269,8 +346,16 @@ void World::printOrganismsInfo() {
 	std::cout << "Organisms info:\n";
 	std::cout << "----------------\n\n";
 
+	int counter = 0;
+	
 	for (auto organism : organismsList) {
 		organism->printShortInfo();
+		std::cout << "\t";
+
+		counter++;
+		if (counter == 40) {
+			break;
+		}
 	}
 }
 
@@ -303,12 +388,37 @@ Point World::getPlayerPosition() const {
 }
 
 
+PlayerAction World::getPlayerAction() const {
+	return playerAction;
+}
+
+
+bool World::getIsPlayerAlive() const {
+	return isPlayerAlive;
+}
+
+
+Organism* World::getOrganismAt(Point position) const {
+	return organisms[position.x][position.y];
+}
+
+
 void World::setPlayerPosition(int x, int y) {
 	playerPosition.x = x;
 	playerPosition.y = y;
 }
 
 
+void World::setPlayerAction(PlayerAction playerAction) {
+	this->playerAction = playerAction;
+}
+
+
 void World::setPlayerPosition(Point& position) {
 	playerPosition = position;
+}
+
+
+void World::setIsPlayerAlive(bool isPlayerAlive) {
+	this->isPlayerAlive = isPlayerAlive;
 }

@@ -9,9 +9,10 @@
 
 #include "Organism.h"
 #include "Point.h"
+#include "Resources.h"
 
 
-int const WORLD_SIZE = 10;
+int const WORLD_SIZE = 15;
 
 
 class World
@@ -20,10 +21,15 @@ private:
 	Organism* organisms[WORLD_SIZE][WORLD_SIZE];
 	std::vector<Organism*> organismsList;
 	std::vector<std::string> turnSummaryMessages;
+	
 	Point playerPosition;
+	PlayerAction playerAction;
+
+	bool isPlayerAlive;
 
 public:
 	World();
+	
 	~World();
 
 	void drawWorld();
@@ -42,10 +48,15 @@ public:
 	void movePlayerRight();
 
 	bool isEmpty(Point position);
+	bool isOccupied(Point position);
 	bool isWithinBoardBoundaries(Point position);
-	bool isWithinBoardBoundaries(int x, int y);
+	bool static isWithinBoardBoundaries(int x, int y);
+	bool hasFreeSpace(Point position);
+
+	static bool compareOrganismsByInitiativeAndAge(Organism* lhs, Organism* rhs);
 
 	Point getRandomNeighbour(const Point& position) const;
+	Point getRandomFreeSpaceAround(const Point& position) const;
 
 	void addTurnSummaryMessage(const std::string& message);
 
@@ -58,7 +69,13 @@ public:
 	void printStatistics();
 
 	Point getPlayerPosition() const;
+	PlayerAction getPlayerAction() const;
+	bool getIsPlayerAlive() const;
+	Organism* getOrganismAt(Point position) const;
+
 	void setPlayerPosition(int x, int y);
 	void setPlayerPosition(Point& position);
+	void setPlayerAction(PlayerAction playerAction);
+	void setIsPlayerAlive(bool isPlayerAlive);
 };
 

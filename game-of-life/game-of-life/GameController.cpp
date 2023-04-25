@@ -54,10 +54,13 @@ void GameController::spawnOrganism(Organism* organism, Point position) {
 
 
 void GameController::createHuman() {
-	Point position = Point(0, 0);
-	Human* human = new Human(5, 4, 'H', position, *world);
-	
-	world->createHuman(human, position);
+	Point humanPosition = Point(0, 0);
+	Human* human = new Human(humanPosition, *world);
+	world->createHuman(human, humanPosition);
+
+	//Point wolfPosition = Point(1, 1);
+	Wolf* wolf = new Wolf(*world);
+	world->spawnOrganism(wolf);
 }
 
 

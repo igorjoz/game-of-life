@@ -6,7 +6,7 @@
 
 #include "World.h"
 #include "Human.h"
-
+#include "Wolf.h"
 
 
 // Keys' codes

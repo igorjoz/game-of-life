@@ -2,12 +2,7 @@
 
 
 Human::Human(const Point& position, World& world) :
-	PredatorAnimal(5, 4, 'H', position, world) {
-}
-
-
-Human::Human(int strength, int initiative, char symbol, const Point& position, World& world) :
-	PredatorAnimal(strength, initiative, symbol, position, world) {
+	PredatorAnimal(5, 4, 'H', position, world), specialAbilityCooldown{ 0 } {
 }
 
 
@@ -35,6 +30,11 @@ bool Human::collision(Organism& other) {
 
 void Human::draw() {
 	//world.draw(position, symbol);
+}
+
+
+void Human::activateSpecialAbility(SpecialAbility specialAbility) {
+	// TODO: implement this
 }
 
 

@@ -2,6 +2,7 @@
 
 
 #include <iostream>
+#include <vector>
 
 
 #include "Organism.h"
@@ -9,13 +10,13 @@
 
 
 int const WORLD_SIZE = 10;
-//int const WORLD_SIZE = 20;
 
 
 class World
 {
 private:
 	Organism* organisms[WORLD_SIZE][WORLD_SIZE];
+	std::vector<Organism*> organismsList;
 	Point playerPosition;
 
 public:

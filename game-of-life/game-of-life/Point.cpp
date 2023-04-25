@@ -1,11 +1,11 @@
 #include "Point.h"
 
 
-Point::Point() : x(0), y(0) {
+Point::Point() : x{ 0 }, y{ 0 } {
 }
 
 
-Point::Point(int x, int y) : x(x), y(y) {
+Point::Point(int x, int y) : x{ x }, y{ y } {
 }
 
 
@@ -26,4 +26,11 @@ bool Point::operator==(const Point& other) const {
 
 bool Point::operator!=(const Point& other) const {
 	return !(*this == other);
+}
+
+
+Point& Point::operator=(const Point& other) {
+	x = other.x;
+	y = other.y;
+	return *this;
 }

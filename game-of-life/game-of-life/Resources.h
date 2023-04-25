@@ -17,3 +17,11 @@ enum PlayerAction {
 	MOVE_RIGHT,
 	USE_SPECIAL_ABILITY
 };
+
+
+int const ARROW_UP = 72;
+int const ARROW_DOWN = 80;
+int const ARROW_LEFT = 75;
+int const ARROW_RIGHT = 77;
+
+int const ESC = 27;

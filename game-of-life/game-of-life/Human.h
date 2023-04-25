@@ -5,13 +5,13 @@
 #include "Resources.h"
 
 
-class Human : public PredatorAnimal
+class Human : public Animal
 {
 private:
 	int specialAbilityCooldown;
 	PlayerAction playerAction;
 
-	void move(const Point& position) override;
+	//void move(const Point& position) override;
 	void eat(Organism& other) override;
 	void reproduce(const Point& position) override;
 
@@ -33,5 +33,8 @@ public:
 	virtual void die() override;
 
 	void activateSpecialAbility(SpecialAbility specialAbility);
+
+	PlayerAction getPlayerAction() const;
+	void setPlayerAction(PlayerAction playerAction);
 };
 

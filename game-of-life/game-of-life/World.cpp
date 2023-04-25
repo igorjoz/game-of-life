@@ -114,15 +114,15 @@ void World::move(Point position, Point destination) {
 
 
 void World::remove(Point position) {
-	if (organisms[position.x][position.y] != nullptr) {
-		delete organisms[position.x][position.y];
-		organisms[position.x][position.y] = nullptr;
-	}
-
 	for (int i = 0; i < organismsList.size(); i++) {
 		if (organismsList[i]->getPosition() == position) {
 			organismsList.erase(organismsList.begin() + i);
 		}
+	}
+	
+	if (organisms[position.x][position.y] != nullptr) {
+		delete organisms[position.x][position.y];
+		organisms[position.x][position.y] = nullptr;
 	}
 }
 
@@ -353,7 +353,7 @@ void World::printOrganismsInfo() {
 		std::cout << "\t";
 
 		counter++;
-		if (counter == 40) {
+		if (counter == 30) {
 			break;
 		}
 	}

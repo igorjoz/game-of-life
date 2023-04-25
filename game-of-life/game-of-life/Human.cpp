@@ -2,7 +2,7 @@
 
 
 Human::Human(const Point& position, World& world) :
-	PredatorAnimal(STRENGTH, INITIATIVE, SYMBOL, position, world), specialAbilityCooldown{ 0 }, playerAction{ PlayerAction::NONE } {
+	Animal(STRENGTH, INITIATIVE, SYMBOL, position, world), specialAbilityCooldown{ 0 }, playerAction{ PlayerAction::NONE } {
 }
 
 
@@ -15,20 +15,23 @@ void Human::action() {
 		specialAbilityCooldown--;
 	}
 
-	Point destination;
+	int x = position.x;
+	int y = position.y;
 
 	if (playerAction == PlayerAction::MOVE_UP) {
-		destination = Point(position.x, position.y - 1);
+		y -= 1;
 	}
 	else if (playerAction == PlayerAction::MOVE_DOWN) {
-		destination = Point(position.x, position.y + 1);
+		y += 1;
 	}
 	else if (playerAction == PlayerAction::MOVE_LEFT) {
-		destination = Point(position.x - 1, position.y);
+		x -= 1;
 	}
 	else if (playerAction == PlayerAction::MOVE_RIGHT) {
-		destination = Point(position.x + 1, position.y);
+		x += 1;
 	}
+
+	Point destination(x, y);
 
 	if (!world.isWithinBoardBoundaries(destination)) {
 		return;
@@ -36,8 +39,9 @@ void Human::action() {
 
 	if (canMoveTo(destination)) {
 		move(destination);
+		world.setPlayerPosition(x, y);
 
-		//return;
+		return;
 	}
 
 	if (world.isOccupied(destination)) {
@@ -46,17 +50,7 @@ void Human::action() {
 		if (collision(*other)) {
 			return;
 		}
-	}
-
-	// Human is controlled by the player, so it shouldn't have action method implemented
-	
-	//Point destination = world.getRandomNeighbour(position);
-
-	//if (canMoveTo(destination)) {
-	//	move(destination);
-	//}
-
-	
+	}	
 }
 
 
@@ -88,9 +82,9 @@ void Human::activateSpecialAbility(SpecialAbility specialAbility) {
 }
 
 
-void Human::move(const Point& position) {
-	Animal::move(position);
-}
+//void Human::move(const Point& position) {
+//	Animal::move(position);
+//}
 
 
 void Human::eat(Organism& other) {
@@ -110,4 +104,14 @@ bool Human::canMoveTo(const Point& destination) const {
 
 bool Human::canEat(const Organism& other) const {
 	return Animal::canEat(other);
+}
+
+
+PlayerAction Human::getPlayerAction() const {
+	return playerAction;
+}
+
+
+void Human::setPlayerAction(PlayerAction playerAction) {
+	this->playerAction = playerAction;
 }

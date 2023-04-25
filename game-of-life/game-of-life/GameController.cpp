@@ -87,6 +87,8 @@ void GameController::getInputFromPlayer() {
 
 
 void GameController::handlePlayerInput() {	
+	Human* human = dynamic_cast<Human*> (world->getOrganismAt(world->getPlayerPosition()));
+	
 	switch (playerInput) {
 		case 'q':
 		case ESC: {
@@ -97,6 +99,8 @@ void GameController::handlePlayerInput() {
 		case 'w':
 		case ARROW_UP: {
 			world->setPlayerAction(PlayerAction::MOVE_UP);
+			human->setPlayerAction(PlayerAction::MOVE_UP);
+
 			//world->movePlayerUp();
 			break;
 		}
@@ -104,6 +108,8 @@ void GameController::handlePlayerInput() {
 		case 's':
 		case ARROW_DOWN: {
 			world->setPlayerAction(PlayerAction::MOVE_DOWN);
+			human->setPlayerAction(PlayerAction::MOVE_DOWN);
+
 			//world->movePlayerDown();
 			break;
 		}
@@ -111,6 +117,8 @@ void GameController::handlePlayerInput() {
 		case 'a':
 		case ARROW_LEFT: {
 			world->setPlayerAction(PlayerAction::MOVE_LEFT);
+			human->setPlayerAction(PlayerAction::MOVE_LEFT);
+
 			//world->movePlayerLeft();
 			break;
 		}
@@ -118,6 +126,8 @@ void GameController::handlePlayerInput() {
 		case 'd':
 		case ARROW_RIGHT: {
 			world->setPlayerAction(PlayerAction::MOVE_RIGHT);
+			human->setPlayerAction(PlayerAction::MOVE_RIGHT);
+			
 			//world->movePlayerRight();
 			break;
 		}

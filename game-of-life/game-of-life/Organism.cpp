@@ -45,6 +45,22 @@ Organism::~Organism() {
 }
 
 
+void Organism::printInfo() {
+	std::cout << "Symbol: " << symbol << "\n";
+	
+	std::cout << "Strength: " << strength << "\n";
+	std::cout << "Initiative: " << initiative << "\n";
+	std::cout << "Age: " << age << "\n";
+	
+	std::cout << "Position: (" << position.x << ", " << position.y << ")" << "\n";
+}
+
+
+void Organism::printShortInfo() {
+	std::cout << symbol << " (" << position.x << ", " << position.y << ")" << "\n";
+}
+
+
 int Organism::getStrength() const {
 	return strength;
 }

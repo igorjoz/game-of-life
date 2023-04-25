@@ -26,15 +26,15 @@ void Animal::action() {
 bool Animal::collision(Organism& other) {
 	if (canEat(other)) {
 		eat(other);
+		
 		return true;
 	}
+	else {
+		other.collision(*this);
+	}
+	
 	return false;
 }
-
-
-//void Animal::draw() {
-//	world.draw(position, symbol);
-//}
 
 
 void Animal::move(const Point& destination) {
@@ -45,6 +45,10 @@ void Animal::move(const Point& destination) {
 
 void Animal::eat(Organism& other) {
 	world.remove(other.getPosition());
+
+	std::string message = "Organism " + std::string(1, other.getSymbol()) + " was eaten by " + std::string(1, symbol) + " at (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ")";
+
+	world.addTurnSummaryMessage(message);
 }
 
 
@@ -63,7 +67,6 @@ bool Animal::canMoveTo(const Point& destination) const {
 		}
 	}*/
 
-	// check coordinates
 	if (destination.x < 0 or destination.x >= WORLD_SIZE or destination.y < 0 or destination.y >= WORLD_SIZE) {
 		canMoveTo = false;
 	}
@@ -73,5 +76,9 @@ bool Animal::canMoveTo(const Point& destination) const {
 
 
 bool Animal::canEat(const Organism& other) const {
-	return false;
+	if (typeid(*this) == typeid(other)) {
+		return false;
+	}
+
+	return strength > other.getStrength();
 }

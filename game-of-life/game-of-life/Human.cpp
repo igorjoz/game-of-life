@@ -2,7 +2,7 @@
 
 
 Human::Human(const Point& position, World& world) :
-	PredatorAnimal(5, 4, 'H', position, world), specialAbilityCooldown{ 0 } {
+	PredatorAnimal(HUMAN_STRENGTH, HUMAN_INITIATIVE, HUMAN_SYMBOL, position, world), specialAbilityCooldown{ 0 } {
 }
 
 
@@ -11,11 +11,13 @@ Human::~Human() {
 
 
 void Human::action() {
-	Point destination = world.getRandomNeighbour(position);
+	// Human is controlled by the player, so it shouldn't have action method implemented
+	
+	//Point destination = world.getRandomNeighbour(position);
 
-	if (canMoveTo(destination)) {
-		move(destination);
-	}
+	//if (canMoveTo(destination)) {
+	//	move(destination);
+	//}
 }
 
 

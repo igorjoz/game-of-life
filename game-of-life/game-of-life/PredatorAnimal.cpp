@@ -29,6 +29,7 @@ bool PredatorAnimal::collision(Organism& other) {
 		eat(other);
 		return true;
 	}
+	
 	return false;
 }
 
@@ -59,5 +60,5 @@ bool PredatorAnimal::canMoveTo(const Point& destination) const {
 
 
 bool PredatorAnimal::canEat(const Organism& other) const {
-	return false;
+	return Animal::canEat(other);
 }

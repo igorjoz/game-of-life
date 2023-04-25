@@ -30,6 +30,9 @@ public:
 	virtual bool collision(Organism& other) = 0;
 	virtual void draw() = 0;
 
+	void printInfo();
+	void printShortInfo();
+
 	int getStrength() const;
 	int getInitiative() const;
 	int getAge() const;

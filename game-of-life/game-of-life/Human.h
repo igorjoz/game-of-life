@@ -12,6 +12,11 @@ enum SpecialAbility {
 };
 
 
+int const HUMAN_STRENGTH = 5;
+int const HUMAN_INITIATIVE = 4;
+char const HUMAN_SYMBOL = 'H';
+
+
 class Human : public PredatorAnimal
 {
 private:

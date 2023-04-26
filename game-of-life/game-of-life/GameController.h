@@ -2,6 +2,7 @@
 
 
 #include "conio.h"
+#include "fstream"
 
 
 #include "World.h"
@@ -24,10 +25,15 @@ private:
 	World* world;
 
 	char playerInput;
-	bool isRunning;
 	int turn;
+	bool isRunning;
+
+	int specialAbilityCooldown;
+	bool isSpecialAbilityActive;
 
 public:
+	static int const SPECIAL_ABILITY_COOLDOWN = 5;
+
 	GameController();
 	~GameController();
 
@@ -53,4 +59,9 @@ public:
 	void printWelcomeMessage();
 	void printStatistics();
 	void printStatisticsAndThanksForPlayingMessage();
+
+	void activateSpecialAbility();
+
+	void saveToFile();
+	void loadFromFile();
 };

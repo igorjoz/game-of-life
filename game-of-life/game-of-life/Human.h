@@ -8,11 +8,9 @@
 class Human : public Animal
 {
 private:
-	int specialAbilityCooldown;
 	PlayerAction playerAction;
 
 	void reproduce(const Point& position) override;
-
 	
 public:
 	static const int STRENGTH = 5;
@@ -27,8 +25,6 @@ public:
 	virtual bool collision(Organism& other) override;
 	virtual void draw() override;
 	virtual void die() override;
-
-	void activateSpecialAbility(SpecialAbility specialAbility);
 
 	PlayerAction getPlayerAction() const;
 	void setPlayerAction(PlayerAction playerAction);

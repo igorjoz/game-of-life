@@ -5,7 +5,9 @@ GameController::GameController() :
 	world { new World() },
 	playerInput{ ' ' },
 	isRunning{ true },
-	turn{ 0 } {
+	turn{ 0 },
+	specialAbilityCooldown { -1 },
+	isSpecialAbilityActive { false } {
 }
 
 
@@ -22,6 +24,26 @@ void GameController::runGame() {
 	while (isRunning and world->getIsPlayerAlive()) {
 		world->drawWorld();
 		world->printTurnSummary();
+
+		if (isSpecialAbilityActive) {
+			getInputFromPlayer();
+			handlePlayerInput();
+
+			world->getHuman()->action();
+
+			if (!isRunning or !world->getIsPlayerAlive()) {
+				break;
+			}
+
+			world->drawWorld();
+			world->printTurnSummary();
+
+			specialAbilityCooldown--;
+
+			if (specialAbilityCooldown == 0) {
+				isSpecialAbilityActive = false;
+			}
+		}
 		
 		getInputFromPlayer();
 		handlePlayerInput();
@@ -198,17 +220,18 @@ void GameController::handlePlayerInput() {
 		}
 
 		case 'e': {
-			world->setPlayerAction(PlayerAction::USE_SPECIAL_ABILITY);
-			human->setPlayerAction(PlayerAction::USE_SPECIAL_ABILITY);
+			activateSpecialAbility();
 			break;
 		}
 
 		case 'k': {
-			// save game to file
+			saveToFile();
+			break;
 		}
 
 		case 'l': {
-			// load game from file
+			loadFromFile();
+			break;
 		}
 
 		default: {
@@ -228,6 +251,9 @@ void GameController::printWelcomeMessage() {
 		std::cout << "Press 's' OR arrow down to move down\n";
 		std::cout << "Press 'a' OR arrow left to move left\n";
 		std::cout << "Press 'd' OR arrow right to move right\n";
+		std::cout << "Press 'e' to use special ability\n";
+		std::cout << "Press 'k' to save the game\n";
+		std::cout << "Press 'l' to load the game\n";
 		std::cout << "Press 'q' OR ESC to quit\n\n";
 		std::cout << "----------------\n\n";
 
@@ -253,4 +279,130 @@ void GameController::printStatisticsAndThanksForPlayingMessage() {
 	std::cout << "Press any key to exit...\n";
 
 	playerInput = _getch();
+}
+
+
+void GameController::activateSpecialAbility() {
+	isSpecialAbilityActive = true;
+	specialAbilityCooldown = SPECIAL_ABILITY_COOLDOWN;
+}
+
+
+void GameController::saveToFile() {
+	std::ofstream file;
+	file.open("save.txt");
+
+	file << turn << "\n";
+	file << WORLD_SIZE << " ";
+	file << world->getOrganismsList().size() << "\n";
+
+	file << world->getPlayerPosition().x << " ";
+	file << world->getPlayerPosition().y << "\n";
+
+	for (Organism* organism : world->getOrganismsList()) {
+		file << organism->getPosition().x << " ";
+		file << organism->getPosition().y << " ";
+		
+		file << organism->getStrength() << " ";
+		file << organism->getInitiative() << " ";
+		file << organism->getAge() << " ";
+		
+		file << organism->getSymbol() << " ";
+		file << organism->getIsAnimal() << " ";
+		file << organism->getSpecies() << "\n";
+	}
+
+	file.close();
+}
+
+
+void GameController::loadFromFile() {
+	std::ifstream file;
+
+	file.open("save.txt");
+
+	if (!file.is_open()) {
+		std::cout << "Error: could not open file\n";
+
+		return;
+	}
+
+	/*for (Organism* organism : world->getOrganismsList()) {
+		delete organism;
+	}*/
+
+	// clear organisms array in World
+	world->clearOrganisms();
+
+
+	int organismsQuantity;
+	int worldSize;
+	int playerX, playerY;
+
+	int x, y;
+	int strength, initiative, age;
+	char symbol;
+	bool isAnimal;
+	int species;
+
+	file >> turn;
+	file >> worldSize;
+	file >> organismsQuantity;
+	file >> playerX >> playerY;
+
+	world->setPlayerPosition(playerX, playerY);
+
+	for (int i = 0; i < organismsQuantity; i++) {
+		file >> x;
+		file >> y;
+		file >> strength;
+		file >> initiative;
+		file >> age;
+		file >> symbol;
+		file >> isAnimal;
+		file >> species;
+
+		Organism* organism = nullptr;
+
+		if (species == Species::HUMAN) {
+			organism = new Human(Point(x, y), *world);
+		}
+		else if (species == Species::WOLF) {
+			organism = new Wolf(Point(x, y), *world);
+		}
+		else if (species == Species::FOX) {
+			organism = new Fox(Point(x, y), *world);
+		}
+		else if (species == Species::SHEEP) {
+			organism = new Sheep(Point(x, y), *world);
+		}
+		else if (species == Species::TORTOISE) {
+			organism = new Tortoise(Point(x, y), *world);
+		}
+		else if (species == Species::ANTELOPE) {
+			organism = new Antelope(Point(x, y), *world);
+		}
+		else if (species == Species::GRASS) {
+			organism = new Grass(Point(x, y), *world);
+		}
+		else if (species == Species::DANDELION) {
+			organism = new Dandelion(Point(x, y), *world);
+		}
+		else if (species == Species::GUARANA) {
+			organism = new Guarana(Point(x, y), *world);
+		}
+		else if (species == Species::NIGHTSHADE) {
+			organism = new Nightshade(Point(x, y), *world);
+		}
+		else if (species == Species::PINE_BORSCHT) {
+			organism = new PineBorscht(Point(x, y), *world);
+		}
+
+		organism->setStrength(strength);
+		organism->setAge(age);
+
+		world->setOrganism(organism, Point(x, y));
+	}
+
+	file.close();
 }

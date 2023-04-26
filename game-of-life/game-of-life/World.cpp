@@ -58,7 +58,6 @@ void World::takeTurn() {
 	sortOrganismsList();
 
 	for (int i = 0; i < organismsList.size(); i++) {
-		// if organism is nullptr, delete it
 		if (organismsList[i] == nullptr) {
 			organismsList.erase(organismsList.begin() + i);
 			i--;
@@ -256,6 +255,25 @@ void World::sortOrganismsList() {
 }
 
 
+void World::clearOrganisms() {
+	// Clear organisms list
+	/*for (auto organism : organismsList) {
+		delete organism;
+	}*/
+
+	organismsList.clear();
+
+	for (int i = 0; i < WORLD_SIZE; i++) {
+		for (int j = 0; j < WORLD_SIZE; j++) {
+			if (organisms[i][j] != nullptr) {
+				delete organisms[i][j];
+				organisms[i][j] = nullptr;
+			}
+		}
+	}
+}
+
+
 bool World::compareOrganismsByInitiativeAndAge(Organism* lhs, Organism* rhs) {
 	if (lhs->getInitiative() == rhs->getInitiative()) {
 		return lhs->getAge() > rhs->getAge();
@@ -328,6 +346,22 @@ Organism* World::getOrganismAt(Point position) const {
 	}
 	
 	return organisms[position.x][position.y];
+}
+
+
+std::vector<Organism*> World::getOrganismsList() const {
+	return organismsList;
+}
+
+
+Organism* World::getHuman() const {
+	for (auto organism : organismsList) {
+		if (organism->getSpecies() == Species::HUMAN) {
+			return organism;
+		}
+	}
+
+	return nullptr;
 }
 
 

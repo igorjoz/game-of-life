@@ -12,7 +12,7 @@
 #include "Resources.h"
 
 
-int const WORLD_SIZE = 15;
+int const WORLD_SIZE = 20;
 
 
 class World
@@ -21,7 +21,7 @@ private:
 	Organism* organisms[WORLD_SIZE][WORLD_SIZE];
 	std::vector<Organism*> organismsList;
 	std::vector<std::string> turnSummaryMessages;
-	
+
 	Point playerPosition;
 	PlayerAction playerAction;
 
@@ -29,7 +29,7 @@ private:
 
 public:
 	World();
-	
+
 	~World();
 
 	void drawWorld();
@@ -57,6 +57,8 @@ public:
 
 	void addToOrganismsList(Organism* organism);
 	void sortOrganismsList();
+	//void clearOrganismsList();
+	void clearOrganisms();
 
 	void printOrganismsInfo();
 	void printTurnSummary();
@@ -67,6 +69,8 @@ public:
 	PlayerAction getPlayerAction() const;
 	bool getIsPlayerAlive() const;
 	Organism* getOrganismAt(Point position) const;
+	std::vector<Organism*> getOrganismsList() const;
+	Organism* getHuman() const;
 
 	void setPlayerPosition(int x, int y);
 	void setPlayerPosition(Point& position);

@@ -2,7 +2,9 @@
 
 
 Human::Human(const Point& position, World& world) :
-	Animal(STRENGTH, INITIATIVE, SYMBOL, position, world), specialAbilityCooldown{ 0 }, playerAction{ PlayerAction::NONE } {
+	Animal(STRENGTH, INITIATIVE, SYMBOL, position, world),
+	playerAction{ PlayerAction::NONE } {
+	species = Species::HUMAN;
 }
 
 
@@ -11,10 +13,6 @@ Human::~Human() {
 
 
 void Human::action() {
-	if (specialAbilityCooldown > 0) {
-		specialAbilityCooldown--;
-	}
-
 	int x = position.x;
 	int y = position.y;
 
@@ -69,11 +67,6 @@ void Human::die() {
 	world.setIsPlayerAlive(false);
 	
 	Animal::die();
-}
-
-
-void Human::activateSpecialAbility(SpecialAbility specialAbility) {
-	// TODO: implement this
 }
 
 

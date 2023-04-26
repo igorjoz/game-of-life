@@ -8,7 +8,8 @@ Organism::Organism(World& world) :
 	symbol{ 'N' },
 	isAnimal{ false },
 	position{ Point(0, 0) },
-	world(world) {
+	world(world),
+	species{ Species::ORGANISM } {
 }
 
 
@@ -19,7 +20,8 @@ Organism::Organism(int strength, int initiative, char symbol, Point position, Wo
 	symbol{ symbol },
 	isAnimal { false },
 	position{ position },
-	world{ world } {
+	world{ world },
+	species{ Species::ORGANISM } {
 }
 
 
@@ -30,7 +32,8 @@ Organism::Organism(int strength, int initiative, int age, char symbol, Point pos
 	symbol{ symbol },
 	isAnimal{ false },
 	position{ position },
-	world{ world } {
+	world{ world },
+	species { Species::ORGANISM } {
 }
 
 
@@ -41,7 +44,8 @@ Organism::Organism(int strength, int initiative, char symbol, World& world) :
 	symbol{ symbol },
 	isAnimal{ false },
 	position{ Point(0, 0) },
-	world{ world } {
+	world{ world },
+	species{ Species::ORGANISM } {
 }
 
 
@@ -105,6 +109,11 @@ int Organism::getY() const {
 }
 
 
+Species Organism::getSpecies() const {
+	return species;
+}
+
+
 void Organism::setPosition(int x, int y) {
 	position.x = x;
 	position.y = y;
@@ -118,4 +127,14 @@ void Organism::setPosition(Point& position) {
 
 void Organism::setStrength(int strength) {
 	this->strength = strength;
+}
+
+
+void Organism::setAge(int age) {
+	this->age = age;
+}
+
+
+void Organism::setIsAnimal(bool isAnimal) {
+	this->isAnimal = isAnimal;
 }

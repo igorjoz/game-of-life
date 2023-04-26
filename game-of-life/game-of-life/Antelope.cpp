@@ -2,10 +2,12 @@
 
 
 Antelope::Antelope(const Point& position, World& world) : PreyAnimal{ STRENGTH, INITIATIVE, SYMBOL, position, world } {
+	species = Species::ANTELOPE;
 }
 
 
 Antelope::Antelope(World& world) : PreyAnimal{ STRENGTH, INITIATIVE, SYMBOL, world } {
+	species = Species::ANTELOPE;
 }
 
 

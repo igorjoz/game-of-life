@@ -2,10 +2,12 @@
 
 
 Fox::Fox(const Point& position, World& world) : PredatorAnimal(STRENGTH, INITIATIVE, SYMBOL, position, world) {
+	species = Species::FOX;
 }
 
 
 Fox::Fox(World& world) : PredatorAnimal(STRENGTH, INITIATIVE, SYMBOL, world) {
+	species = Species::FOX;
 }
 
 

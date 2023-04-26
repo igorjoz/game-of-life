@@ -3,16 +3,19 @@
 
 Plant::Plant(char symbol, const Point& position, World& world) :
 	Organism(0, INITIATIVE, symbol, position, world) {
+	species = Species::PLANT;
 }
 
 
 Plant::Plant(int strength, char symbol, const Point& position, World& world) :
 	Organism(strength, INITIATIVE, symbol, position, world) {
+	species = Species::PLANT;
 }
 
 
 Plant::Plant(int strength, char symbol, World& world) :
 	Organism(strength, INITIATIVE, symbol, world) {
+	species = Species::PLANT;
 }
 
 

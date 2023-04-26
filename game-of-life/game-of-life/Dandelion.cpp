@@ -3,11 +3,13 @@
 
 Dandelion::Dandelion(const Point& position, World& world) :
 	Plant(STRENGTH, SYMBOL, position, world) {
+	species = Species::DANDELION;
 }
 
 
 Dandelion::Dandelion(World& world) :
 	Plant(STRENGTH, SYMBOL, world) {
+	species = Species::DANDELION;
 }
 
 

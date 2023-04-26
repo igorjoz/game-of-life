@@ -3,11 +3,13 @@
 
 Nightshade::Nightshade(const Point& position, World& world) :
 	Plant(STRENGTH, SYMBOL, position, world) {
+	species = Species::NIGHTSHADE;
 }
 
 
 Nightshade::Nightshade(World& world) :
 	Plant(STRENGTH, SYMBOL, world) {
+	species = Species::NIGHTSHADE;
 }
 
 

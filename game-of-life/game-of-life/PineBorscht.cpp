@@ -3,11 +3,13 @@
 
 PineBorscht::PineBorscht(const Point& position, World& world)
 	: Plant(STRENGTH, SYMBOL, position, world) {
+	species = Species::PINE_BORSCHT;
 }
 
 
 PineBorscht::PineBorscht(World& world)
 	: Plant(STRENGTH, SYMBOL, world) {
+	species = Species::PINE_BORSCHT;
 }
 
 

@@ -3,11 +3,13 @@
 
 Grass::Grass(World& world) :
 	Plant(STRENGTH, SYMBOL, world) {
+	species = Species::GRASS;
 }
 
 
 Grass::Grass(const Point& position, World& world) :
 	Plant(STRENGTH, SYMBOL, position, world) {
+	species = Species::GRASS;
 }
 
 

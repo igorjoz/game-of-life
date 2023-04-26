@@ -3,11 +3,13 @@
 
 Wolf::Wolf(const Point& position, World& world) :
 	PredatorAnimal(STRENGTH, INITIATIVE, SYMBOL, position, world) {
+	species = Species::WOLF;
 }
 
 
 Wolf::Wolf(World& world) :
 	PredatorAnimal(STRENGTH, INITIATIVE, SYMBOL, world) {
+	species = Species::WOLF;
 }
 
 

@@ -2,6 +2,7 @@
 
 
 #include "Point.h"
+#include "Resources.h"
 
 
 class World;
@@ -17,7 +18,7 @@ protected:
 	bool isAnimal;
 	Point position;
 	World& world;
-
+	Species species;
 	
 public:
 	Organism(World& world);
@@ -47,9 +48,12 @@ public:
 	Point& getPosition();
 	int getX() const;
 	int getY() const;
+	Species getSpecies() const;
 
 	void setPosition(int x, int y);
 	void setPosition(Point& position);
 	void setStrength(int strength);
+	void setAge(int age);
+	void setIsAnimal(bool isAnimal);
 };
 

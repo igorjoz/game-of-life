@@ -3,11 +3,13 @@
 
 Guarana::Guarana(const Point& position, World& world) :
 	Plant(STRENGTH, SYMBOL, position, world) {
+	species	= Species::GUARANA;
 }
 
 
 Guarana::Guarana(World& world) :
 	Plant(STRENGTH, SYMBOL, world) {
+	species = Species::GUARANA;
 }
 
 

@@ -3,11 +3,13 @@
 
 Tortoise::Tortoise(const Point& position, World& world) :
 	PreyAnimal(STRENGTH, INITIATIVE, SYMBOL, position, world) {
+	species = Species::TORTOISE;
 }
 
 
 Tortoise::Tortoise(World& world) :
 	PreyAnimal(STRENGTH, INITIATIVE, SYMBOL, world) {
+	species = Species::TORTOISE;
 }
 
 

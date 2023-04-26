@@ -19,6 +19,24 @@ enum PlayerAction {
 };
 
 
+enum Species {
+	ORGANISM,
+	HUMAN,
+	ANIMAL,
+	PLANT,
+	WOLF,
+	FOX,
+	TORTOISE,
+	ANTELOPE,
+	SHEEP,
+	GRASS,
+	GUARANA,
+	DANDELION,
+	NIGHTSHADE,
+	PINE_BORSCHT
+};
+
+
 int const ARROW_UP = 72;
 int const ARROW_DOWN = 80;
 int const ARROW_LEFT = 75;

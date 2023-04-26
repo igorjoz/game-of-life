@@ -3,11 +3,13 @@
 
 Sheep::Sheep(const Point& position, World& world) :
 	PreyAnimal(STRENGTH, INITIATIVE, SYMBOL, position, world) {
+	species = Species::SHEEP;
 }
 
 
 Sheep::Sheep(World& world) :
 	PreyAnimal(STRENGTH, INITIATIVE, SYMBOL, world) {
+	species = Species::SHEEP;
 }
 
 

@@ -51,6 +51,10 @@ void Plant::die() {
 
 void Plant::kill(Organism& other) {
 	other.die();
+
+	std::string message = "Organism " + std::string(1, other.getSymbol()) + " was killed by " + std::string(1, symbol) + " at (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ")";
+
+	world.addTurnSummaryMessage(message);
 }
 
 

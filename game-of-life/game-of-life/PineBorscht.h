@@ -18,6 +18,7 @@ public:
 	virtual ~PineBorscht();
 
 	virtual bool canReproduceThisTurn() const override;
+	virtual bool canKill(const Organism& other) const override;
 
 	virtual bool collision(Organism& other) override;
 	virtual void action() override;

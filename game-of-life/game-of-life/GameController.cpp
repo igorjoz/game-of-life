@@ -56,6 +56,9 @@ void GameController::spawnInitialOrganisms() {
 	
 	spawnGrass();
 	spawnDandelions();
+	spawnGuarana();
+	spawnNightshade();
+	//spawnPineBorscht();
 }
 
 
@@ -118,6 +121,30 @@ void GameController::spawnDandelions() {
 	for (int i = 0; i < Dandelion::INITIAL_QUANTITY; i++) {
 		Dandelion* dandelion = new Dandelion(*world);
 		world->spawnOrganism(dandelion);
+	}
+}
+
+
+void GameController::spawnGuarana() {
+	for (int i = 0; i < Guarana::INITIAL_QUANTITY; i++) {
+		Guarana* guarana = new Guarana(*world);
+		world->spawnOrganism(guarana);
+	}
+}
+
+
+void GameController::spawnNightshade() {
+	for (int i = 0; i < Nightshade::INITIAL_QUANTITY; i++) {
+		Nightshade* nightshade = new Nightshade(*world);
+		world->spawnOrganism(nightshade);
+	}
+}
+
+
+void GameController::spawnPineBorscht() {
+	for (int i = 0; i < PineBorscht::INITIAL_QUANTITY; i++) {
+		PineBorscht* pineBorscht = new PineBorscht(*world);
+		world->spawnOrganism(pineBorscht);
 	}
 }
 

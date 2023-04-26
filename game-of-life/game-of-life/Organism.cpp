@@ -105,3 +105,8 @@ void Organism::setPosition(int x, int y) {
 void Organism::setPosition(Point& position) {
 	this->position = position;
 }
+
+
+void Organism::setStrength(int strength) {
+	this->strength = strength;
+}

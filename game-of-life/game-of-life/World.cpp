@@ -314,6 +314,10 @@ bool World::getIsPlayerAlive() const {
 
 
 Organism* World::getOrganismAt(Point position) const {
+	if (!isWithinBoardBoundaries(position.x, position.y)) {
+		return nullptr;
+	}
+	
 	return organisms[position.x][position.y];
 }
 

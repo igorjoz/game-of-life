@@ -13,6 +13,9 @@
 #include "Antelope.h"
 #include "Grass.h"
 #include "Dandelion.h"
+#include "Guarana.h"
+#include "Nightshade.h"
+#include "PineBorscht.h"
 
 
 class GameController
@@ -40,6 +43,9 @@ public:
 	void spawnAntelopes();
 	void spawnGrass();
 	void spawnDandelions();
+	void spawnGuarana();
+	void spawnNightshade();
+	void spawnPineBorscht();
 
 	void getInputFromPlayer();
 	void handlePlayerInput();

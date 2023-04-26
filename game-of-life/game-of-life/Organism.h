@@ -48,5 +48,6 @@ public:
 
 	void setPosition(int x, int y);
 	void setPosition(Point& position);
+	void setStrength(int strength);
 };
 

@@ -7,6 +7,7 @@
 #include "World.h"
 #include "Human.h"
 #include "Wolf.h"
+#include "Fox.h"
 #include "Grass.h"
 
 
@@ -29,6 +30,7 @@ public:
 	void spawnInitialOrganisms();
 	void createHuman();
 	void spawnWolves();
+	void spawnFoxes();
 	void spawnGrass();
 
 	void getInputFromPlayer();

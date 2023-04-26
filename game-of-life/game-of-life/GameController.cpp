@@ -48,6 +48,7 @@ void GameController::spawnInitialOrganisms() {
 	createHuman();
 
 	spawnWolves();
+	spawnFoxes();
 	
 	spawnGrass();
 }
@@ -64,6 +65,14 @@ void GameController::spawnWolves() {
 	for (int i = 0; i < Wolf::INITIAL_QUANTITY; i++) {
 		Wolf* wolf = new Wolf(*world);
 		world->spawnOrganism(wolf);
+	}
+}
+
+
+void GameController::spawnFoxes() {
+	for (int i = 0; i < Fox::INITIAL_QUANTITY; i++) {
+		Fox* fox = new Fox(*world);
+		world->spawnOrganism(fox);
 	}
 }
 

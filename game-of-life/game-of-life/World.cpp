@@ -1,7 +1,7 @@
 #include "World.h"
 
 
-World::World() : isPlayerAlive(true), playerAction(PlayerAction::NONE) {
+World::World() : isPlayerAlive{ true }, playerAction{ PlayerAction::NONE } {
 	for (int i = 0; i < WORLD_SIZE; i++) {
 		for (int j = 0; j < WORLD_SIZE; j++) {
 			organisms[i][j] = nullptr;
@@ -128,18 +128,6 @@ void World::remove(Point position) {
 
 
 void World::movePlayerUp() {
-	// find human in organismsList
-	// move human up
-	
-	/*Human* human = nullptr;
-	
-	for (int i = 0; i < organismsList.size(); i++) {
-		if (organismsList[i]->getSymbol() == 'H') {
-			human = (Human*)organismsList[i];
-		}
-	}*/
-
-	
 	if (!isWithinBoardBoundaries(playerPosition.x, playerPosition.y - 1)) {
 		return;
 	}
@@ -344,7 +332,7 @@ bool World::compareOrganismsByInitiativeAndAge(Organism* lhs, Organism* rhs) {
 
 void World::printOrganismsInfo() {
 	std::cout << "Organisms info:\n";
-	std::cout << "----------------\n\n";
+	std::cout << "----------------\n";
 
 	int counter = 0;
 	
@@ -363,9 +351,10 @@ void World::printOrganismsInfo() {
 void World::printTurnSummary() {
 	std::cout << "\n";
 	std::cout << "Turn actions summary:\n";
-	std::cout << "----------------\n\n";
+	std::cout << "----------------\n";
 
-	std::cout << "Human position: (x: " << playerPosition.x << ", y: " << playerPosition.y << ")\n";
+	std::cout << "Human position: " << playerPosition << "\n";
+	std::cout << "Total number of organisms: " << organismsList.size() << "\n";
 
 	for (auto message : turnSummaryMessages) {
 		std::cout << message << "\n";

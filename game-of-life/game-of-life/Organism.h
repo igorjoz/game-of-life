@@ -33,6 +33,7 @@ public:
 	virtual void die() = 0;
 	virtual void kill(Organism& other) = 0;
 	virtual bool canKill(const Organism& other) const = 0;
+	virtual bool canBeKilledBy(const Organism& other) const = 0;
 	
 	void printInfo();
 	void printShortInfo();

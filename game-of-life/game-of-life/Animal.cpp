@@ -102,7 +102,16 @@ bool Animal::canKill(const Organism& other) const {
 		return false;
 	}
 
-	return strength > other.getStrength();
+	return other.canBeKilledBy(*this);
+}
+
+
+bool Animal::canBeKilledBy(const Organism& other) const {
+	if (typeid(*this) == typeid(other)) {
+		return false;
+	}
+
+	return strength < other.getStrength();
 }
 
 

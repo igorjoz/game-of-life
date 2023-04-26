@@ -59,6 +59,15 @@ bool Plant::canKill(const Organism& other) const {
 }
 
 
+bool Plant::canBeKilledBy(const Organism& other) const {
+	if (typeid(*this) == typeid(other)) {
+		return false;
+	}
+	
+	return other.getStrength() >= strength;
+}
+
+
 bool Plant::hasFreeSpace() const {
 	return world.hasFreeSpace(position);
 }

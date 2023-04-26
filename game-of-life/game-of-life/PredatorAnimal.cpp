@@ -35,6 +35,12 @@ void PredatorAnimal::action() {
 
 
 bool PredatorAnimal::collision(Organism& other) {
+	if (canReproduce(other, position)) {
+		reproduce(position);
+
+		return true;
+	}
+	
 	if (canKill(other)) {
 		kill(other);
 
@@ -44,10 +50,6 @@ bool PredatorAnimal::collision(Organism& other) {
 		other.kill(*this);
 	}
 
-	if (canReproduce(other, position)) {
-		reproduce(position);
-	}
-	
 	return false;
 }
 

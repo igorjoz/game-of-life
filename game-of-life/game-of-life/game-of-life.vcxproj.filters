@@ -60,6 +60,9 @@
     <ClCompile Include="Tortoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Antelope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -105,6 +108,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tortoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Antelope.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

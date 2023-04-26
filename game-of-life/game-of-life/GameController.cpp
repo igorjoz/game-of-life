@@ -52,7 +52,7 @@ void GameController::spawnInitialOrganisms() {
 
 	spawnSheep();
 	spawnTortoises();
-	//spawnAntelopes();
+	spawnAntelopes();
 	
 	spawnGrass();
 }
@@ -93,6 +93,14 @@ void GameController::spawnTortoises() {
 	for (int i = 0; i < Tortoise::INITIAL_QUANTITY; i++) {
 		Tortoise* tortoise = new Tortoise(*world);
 		world->spawnOrganism(tortoise);
+	}
+}
+
+
+void GameController::spawnAntelopes() {
+	for (int i = 0; i < Antelope::INITIAL_QUANTITY; i++) {
+		Antelope* antelope = new Antelope(*world);
+		world->spawnOrganism(antelope);
 	}
 }
 

@@ -21,17 +21,17 @@ void PreyAnimal::action() {
 	if (!world.isWithinBoardBoundaries(destination)) {
 		return;
 	}
-
-	if (canMoveTo(destination)) {
-		move(destination);
-
-		return;
-	}
 	
 	if (world.isOccupied(destination)) {
 		Organism* other = world.getOrganismAt(destination);
 
-		collision(*other);
+		//collision(*other);
+
+		return;
+	}
+
+	if (canMoveTo(destination)) {
+		move(destination);
 
 		return;
 	}
@@ -45,13 +45,15 @@ bool PreyAnimal::collision(Organism& other) {
 		return true;
 	}
 	
-	if (canKill(other)) {
+	if (other.canBeKilledBy(*this)) {
 		kill(other);
 
 		return true;
 	}
 	else {
 		other.collision(*this);
+
+		return true;
 	}
 
 	return false;

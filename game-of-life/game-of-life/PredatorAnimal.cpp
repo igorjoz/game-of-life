@@ -28,7 +28,7 @@ void PredatorAnimal::action() {
 		collision(*other);
 	}
 
-	if (canMoveTo(destination)) {
+	if (!world.isOccupied(destination) and canMoveTo(destination)) {
 		move(destination);
 	}
 }
@@ -41,7 +41,7 @@ bool PredatorAnimal::collision(Organism& other) {
 		return true;
 	}
 	
-	if (canKill(other)) {
+	if (other.canBeKilledBy(*this)) {
 		kill(other);
 
 		return true;

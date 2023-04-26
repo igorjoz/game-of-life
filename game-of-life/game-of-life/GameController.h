@@ -10,6 +10,7 @@
 #include "Fox.h"
 #include "Sheep.h"
 #include "Tortoise.h"
+#include "Antelope.h"
 #include "Grass.h"
 
 
@@ -35,7 +36,7 @@ public:
 	void spawnFoxes();
 	void spawnSheep();
 	void spawnTortoises();
-	//void spawnAntelopes();
+	void spawnAntelopes();
 	void spawnGrass();
 
 	void getInputFromPlayer();

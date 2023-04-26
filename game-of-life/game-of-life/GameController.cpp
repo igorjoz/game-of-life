@@ -25,23 +25,29 @@ void GameController::runGame() {
 		world->drawWorld();
 		world->printTurnSummary();
 
-		if (isSpecialAbilityActive) {
-			getInputFromPlayer();
-			handlePlayerInput();
+		bool willActivateSpecialAbility = rand() % 2;
 
-			world->getHuman()->action();
+		if (specialAbilityCooldown < 2 and willActivateSpecialAbility) {
+			if (isSpecialAbilityActive) {
 
-			if (!isRunning or !world->getIsPlayerAlive()) {
-				break;
-			}
+				getInputFromPlayer();
+				handlePlayerInput();
 
-			world->drawWorld();
-			world->printTurnSummary();
+				world->getHuman()->action();
 
-			specialAbilityCooldown--;
+				if (!isRunning or !world->getIsPlayerAlive()) {
+					break;
+				}
 
-			if (specialAbilityCooldown == 0) {
-				isSpecialAbilityActive = false;
+				world->drawWorld();
+				world->printTurnSummary();
+
+				//specialAbilityCooldown--;
+
+				if (specialAbilityCooldown <= 0) {
+					isSpecialAbilityActive = false;
+					specialAbilityCooldown = 5;
+				}
 			}
 		}
 		
@@ -52,7 +58,12 @@ void GameController::runGame() {
 			break;
 		}
 
+		if (playerInput == 'k' or playerInput == 'l') {
+			continue;
+		}
+
 		takeTurn();
+		specialAbilityCooldown--;
 	}
 
 	printStatisticsAndThanksForPlayingMessage();

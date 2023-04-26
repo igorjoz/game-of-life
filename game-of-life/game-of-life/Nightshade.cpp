@@ -45,3 +45,8 @@ bool Nightshade::collision(Organism& other) {
 bool Nightshade::canReproduceThisTurn() const {
 	return false;
 }
+
+
+bool Nightshade::canKill(const Organism& other) const {
+	return true;
+}

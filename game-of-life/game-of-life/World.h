@@ -12,23 +12,23 @@
 #include "Resources.h"
 
 
-int const WORLD_SIZE = 20;
-
-
 class World
 {
 private:
-	Organism* organisms[WORLD_SIZE][WORLD_SIZE];
 	std::vector<Organism*> organismsList;
 	std::vector<std::string> turnSummaryMessages;
 
 	Point playerPosition;
 	PlayerAction playerAction;
 
+	Organism* organisms[WORLD_SIZE][WORLD_SIZE];
+
 	bool isPlayerAlive;
 
+	int size;
+
 public:
-	World();
+	World(int size);
 
 	~World();
 
@@ -45,7 +45,7 @@ public:
 	bool isEmpty(Point position);
 	bool isOccupied(Point position);
 	bool isWithinBoardBoundaries(Point position);
-	bool static isWithinBoardBoundaries(int x, int y);
+	bool static isWithinBoardBoundaries(int x, int y, int size);
 	bool hasFreeSpace(Point position);
 
 	static bool compareOrganismsByInitiativeAndAge(Organism* lhs, Organism* rhs);
@@ -57,7 +57,6 @@ public:
 
 	void addToOrganismsList(Organism* organism);
 	void sortOrganismsList();
-	//void clearOrganismsList();
 	void clearOrganisms();
 
 	void printOrganismsInfo();

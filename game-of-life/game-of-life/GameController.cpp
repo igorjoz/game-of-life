@@ -1,13 +1,14 @@
 #include "GameController.h"
 
 
-GameController::GameController() :
-	world { new World() },
+GameController::GameController(int size) :
+	world { new World(size) },
 	playerInput{ ' ' },
 	isRunning{ true },
 	turn{ 0 },
 	specialAbilityCooldown { -1 },
-	isSpecialAbilityActive { false } {
+	isSpecialAbilityActive { false },
+	size{ size } {
 }
 
 
@@ -304,8 +305,10 @@ void GameController::saveToFile() {
 	file.open("save.txt");
 
 	file << turn << "\n";
-	file << WORLD_SIZE << " ";
+	file << size << " ";
 	file << world->getOrganismsList().size() << "\n";
+
+	file << specialAbilityCooldown << " ";
 
 	file << world->getPlayerPosition().x << " ";
 	file << world->getPlayerPosition().y << "\n";
@@ -338,17 +341,14 @@ void GameController::loadFromFile() {
 		return;
 	}
 
-	/*for (Organism* organism : world->getOrganismsList()) {
-		delete organism;
-	}*/
-
-	// clear organisms array in World
 	world->clearOrganisms();
 
 
 	int organismsQuantity;
 	int worldSize;
 	int playerX, playerY;
+
+	int specialAbilityCooldown;
 
 	int x, y;
 	int strength, initiative, age;
@@ -359,9 +359,13 @@ void GameController::loadFromFile() {
 	file >> turn;
 	file >> worldSize;
 	file >> organismsQuantity;
+
+	file >> specialAbilityCooldown;
+
 	file >> playerX >> playerY;
 
 	world->setPlayerPosition(playerX, playerY);
+	this->specialAbilityCooldown = specialAbilityCooldown;
 
 	for (int i = 0; i < organismsQuantity; i++) {
 		file >> x;

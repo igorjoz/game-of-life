@@ -7,8 +7,13 @@
 int main()
 {
 	srand(time(NULL));
+
+	int size;
+
+	std::cout << "Enter size of the board: ";
+	std::cin >> size;
 	
-	GameController gameController = GameController();
+	GameController gameController = GameController(size);
 	
 	gameController.runGame();
 	

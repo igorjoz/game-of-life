@@ -43,3 +43,5 @@ int const ARROW_LEFT = 75;
 int const ARROW_RIGHT = 77;
 
 int const ESC = 27;
+
+int const WORLD_SIZE = 20;

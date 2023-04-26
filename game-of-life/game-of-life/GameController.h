@@ -31,10 +31,12 @@ private:
 	int specialAbilityCooldown;
 	bool isSpecialAbilityActive;
 
+	int size;
+
 public:
 	static int const SPECIAL_ABILITY_COOLDOWN = 5;
 
-	GameController();
+	GameController(int size);
 	~GameController();
 
 	void runGame();

@@ -32,24 +32,30 @@ void Animal::action() {
 	if (world.isOccupied(destination)) {
 		Organism* other = world.getOrganismAt(destination);
 
-		/*if (collision(*other)) {
-			return;
-		}*/
+		collision(*other);
 	}
 }
 
 
 bool Animal::collision(Organism& other) {
-	if (canEat(other)) {
-		//eat(other);
+	if (canKill(other)) {
+		kill(other);
 		
 		return true;
 	}
 	else {
-		//other.collision(*this);
+		other.collision(*this);
+	}
+
+	if (canReproduce(other, position)) {
+		reproduce(position);
 	}
 	
 	return false;
+}
+
+
+void Animal::draw() {
 }
 
 
@@ -59,17 +65,19 @@ void Animal::move(const Point& destination) {
 }
 
 
-void Animal::eat(Organism& other) {
+void Animal::kill(Organism& other) {
 	other.die();
 
-	std::string message = "Organism " + std::string(1, other.getSymbol()) + " was eaten by " + std::string(1, symbol) + " at (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ")";
+	std::string message = "Organism " + std::string(1, other.getSymbol()) + " was killed by " + std::string(1, symbol) + " at (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ")";
 
 	world.addTurnSummaryMessage(message);
 }
 
 
 void Animal::reproduce(const Point& position) {
-	// TODO
+	std::string message = "Organism " + std::string(1, symbol) + " reproduced at (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ")";
+
+	world.addTurnSummaryMessage(message);
 }
 
 
@@ -89,10 +97,19 @@ bool Animal::canMoveTo(const Point& destination) const {
 }
 
 
-bool Animal::canEat(const Organism& other) const {
+bool Animal::canKill(const Organism& other) const {
 	if (typeid(*this) == typeid(other)) {
 		return false;
 	}
 
 	return strength > other.getStrength();
+}
+
+
+bool Animal::canReproduce(const Organism& other, const Point& position) const {
+	if (typeid(*this) == typeid(other) and world.hasFreeSpace(position)) {
+		return true;
+	}
+
+	return false;
 }

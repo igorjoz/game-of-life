@@ -18,6 +18,16 @@ PredatorAnimal::~PredatorAnimal() {
 void PredatorAnimal::action() {
 	Point destination = world.getRandomNeighbour(position);
 	
+	if (!world.isWithinBoardBoundaries(destination)) {
+		return;
+	}
+
+	if (world.isOccupied(destination)) {
+		Organism* other = world.getOrganismAt(destination);
+
+		collision(*other);
+	}
+
 	if (canMoveTo(destination)) {
 		move(destination);
 	}
@@ -25,42 +35,27 @@ void PredatorAnimal::action() {
 
 
 bool PredatorAnimal::collision(Organism& other) {
-	return Animal::collision(other);
+	if (canKill(other)) {
+		kill(other);
 
-	/*if (canEat(other)) {
-		eat(other);
 		return true;
 	}
+	else if (other.canKill(*this)) {
+		other.kill(*this);
+	}
+
+	if (canReproduce(other, position)) {
+		reproduce(position);
+	}
 	
-	return false;*/
-}
-
-
-void PredatorAnimal::draw() {
-	//world.draw(position, symbol);
-}
-
-
-void PredatorAnimal::move(const Point& position) {
-	Animal::move(position);
-}
-
-
-void PredatorAnimal::eat(Organism& other) {
-	Animal::eat(other);
+	return false;
 }
 
 
 void PredatorAnimal::reproduce(const Point& position) {
+	if (rand() % 2 == 0) {
+		return;
+	}
+	
 	Animal::reproduce(position);
-}
-
-
-bool PredatorAnimal::canMoveTo(const Point& destination) const {
-	return Animal::canMoveTo(destination);
-}
-
-
-bool PredatorAnimal::canEat(const Organism& other) const {
-	return Animal::canEat(other);
 }

@@ -15,26 +15,14 @@ Wolf::~Wolf() {
 }
 
 
-void Wolf::draw() {
-	//world.draw(position, symbol);
+void Wolf::reproduce(const Point& position) {
+	Point freeSpace = world.getRandomFreeSpaceAround(position);
+
+	Wolf* newOrganism = new Wolf(freeSpace, world);
+	world.setOrganism(newOrganism, freeSpace);
+	
+
+	std::string message = "Organism " + std::string(1, symbol) + " reproduced at (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ")";
+
+	world.addTurnSummaryMessage(message);
 }
-
-
-//void Wolf::move(const Point& position) {
-//	PredatorAnimal::move(position);
-//}
-//
-//
-//void Wolf::eat(Organism& other) {
-//	PredatorAnimal::eat(other);
-//}
-//
-//
-//bool Wolf::canMoveTo(const Point& destination) const {
-//	return PredatorAnimal::canMoveTo(destination);
-//}
-//
-//
-//bool Wolf::canEat(const Organism& other) const {
-//	return PredatorAnimal::canEat(other);
-//}

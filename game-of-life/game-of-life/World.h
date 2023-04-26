@@ -21,7 +21,8 @@ private:
 	Point playerPosition;
 	PlayerAction playerAction;
 
-	Organism* organisms[WORLD_SIZE][WORLD_SIZE];
+	//Organism* organisms[WORLD_SIZE][WORLD_SIZE];
+	Organism ***organisms;
 
 	bool isPlayerAlive;
 

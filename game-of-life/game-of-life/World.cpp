@@ -4,7 +4,16 @@
 World::World(int size) : isPlayerAlive{ true }, playerAction{ PlayerAction::NONE } {
 	this->size = size;
 	
+	/*for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			organisms[i][j] = nullptr;
+		}
+	}*/
+
+	organisms = new Organism**[size];
+
 	for (int i = 0; i < size; i++) {
+		organisms[i] = new Organism*[size];
 		for (int j = 0; j < size; j++) {
 			organisms[i][j] = nullptr;
 		}
@@ -88,6 +97,10 @@ void World::spawnOrganism(Organism* organism) {
 
 
 void World::setOrganism(Organism* organism, Point position) {
+	if (position.x < 0 or position.y < 0) {
+		return;
+	}
+	
 	organisms[position.x][position.y] = organism;
 	organisms[position.x][position.y]->setPosition(position);
 
@@ -146,6 +159,10 @@ bool World::isEmpty(Point position) {
 
 
 bool World::isOccupied(Point position) {
+	if (position.x < 0 or position.y < 0) {
+		return false;
+	}
+	
 	return organisms[position.x][position.y] != nullptr;
 }
 
@@ -343,6 +360,10 @@ bool World::getIsPlayerAlive() const {
 
 
 Organism* World::getOrganismAt(Point position) const {
+	if (position.x < 0 or position.y < 0) {
+		return nullptr;
+	}
+	
 	if (!isWithinBoardBoundaries(position.x, position.y, size)) {
 		return nullptr;
 	}

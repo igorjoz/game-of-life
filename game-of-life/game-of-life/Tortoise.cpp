@@ -46,6 +46,14 @@ bool Tortoise::collision(Organism& other) {
 	}
 	else {
 		other.collision(*this);
+
+		if (world.getOrganismAt(position) != nullptr) {
+			Point destination = world.getRandomNeighbour(position);
+
+			if (world.isWithinBoardBoundaries(destination) and !world.isOccupied(destination)) {
+				move(destination);
+			}
+		}
 		
 		return true;
 	}

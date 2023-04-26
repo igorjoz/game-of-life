@@ -25,7 +25,7 @@ void PreyAnimal::action() {
 	if (world.isOccupied(destination)) {
 		Organism* other = world.getOrganismAt(destination);
 
-		//collision(*other);
+		collision(*other);
 
 		return;
 	}
@@ -50,7 +50,7 @@ bool PreyAnimal::collision(Organism& other) {
 
 		return true;
 	}
-	else {
+	else if (other.canKill(*this)) {
 		other.collision(*this);
 
 		return true;

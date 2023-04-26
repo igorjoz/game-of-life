@@ -37,26 +37,22 @@ void Human::action() {
 		return;
 	}
 
+	if (world.isOccupied(destination)) {
+		Organism* other = world.getOrganismAt(destination);
+		
+		collision(*other);
+	}
+
 	if (canMoveTo(destination)) {
 		move(destination);
 		world.setPlayerPosition(x, y);
-
-		return;
 	}
-
-	if (world.isOccupied(destination)) {
-		Organism* other = world.getOrganismAt(destination);
-
-		if (collision(*other)) {
-			return;
-		}
-	}	
 }
 
 
 bool Human::collision(Organism& other) {
-	if (canEat(other)) {
-		eat(other);
+	if (canKill(other)) {
+		kill(other);
 		
 		return true;
 	}
@@ -71,9 +67,9 @@ void Human::draw() {
 
 
 void Human::die() {
-	Animal::die();
-
 	world.setIsPlayerAlive(false);
+	
+	Animal::die();
 }
 
 
@@ -87,8 +83,8 @@ void Human::activateSpecialAbility(SpecialAbility specialAbility) {
 //}
 
 
-void Human::eat(Organism& other) {
-	Animal::eat(other);
+void Human::kill(Organism& other) {
+	Animal::kill(other);
 }
 
 
@@ -102,8 +98,8 @@ bool Human::canMoveTo(const Point& destination) const {
 }
 
 
-bool Human::canEat(const Organism& other) const {
-	return Animal::canEat(other);
+bool Human::canKill(const Organism& other) const {
+	return Animal::canKill(other);
 }
 
 

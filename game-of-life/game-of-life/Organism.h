@@ -31,6 +31,8 @@ public:
 	virtual void reproduce(const Point& position) = 0;
 	virtual void draw() = 0;
 	virtual void die() = 0;
+	virtual void kill(Organism& other) = 0;
+	virtual bool canKill(const Organism& other) const = 0;
 	
 	void printInfo();
 	void printShortInfo();

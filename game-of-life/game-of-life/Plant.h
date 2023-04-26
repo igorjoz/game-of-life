@@ -21,6 +21,9 @@ public:
 	virtual void draw() override;
 	virtual void die() override;
 
+	virtual void kill(Organism& other) override;
+	virtual bool canKill(const Organism& other) const override;
+
 	virtual bool hasFreeSpace() const;
 	virtual bool canReproduceThisTurn() const;
 

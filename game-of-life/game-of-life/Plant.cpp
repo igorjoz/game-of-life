@@ -41,12 +41,21 @@ bool Plant::collision(Organism& other) {
 
 
 void Plant::draw() {
-	//world.draw(position, symbol);
 }
 
 
 void Plant::die() {
 	world.remove(position);
+}
+
+
+void Plant::kill(Organism& other) {
+	other.die();
+}
+
+
+bool Plant::canKill(const Organism& other) const {
+	return false;
 }
 
 

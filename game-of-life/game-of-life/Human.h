@@ -11,12 +11,8 @@ private:
 	int specialAbilityCooldown;
 	PlayerAction playerAction;
 
-	//void move(const Point& position) override;
-	void kill(Organism& other) override;
 	void reproduce(const Point& position) override;
 
-	bool canMoveTo(const Point& destination) const override;
-	bool canKill(const Organism& other) const override;
 	
 public:
 	static const int STRENGTH = 5;
@@ -37,4 +33,3 @@ public:
 	PlayerAction getPlayerAction() const;
 	void setPlayerAction(PlayerAction playerAction);
 };
-

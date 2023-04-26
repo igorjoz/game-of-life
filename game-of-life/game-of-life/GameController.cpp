@@ -49,6 +49,10 @@ void GameController::spawnInitialOrganisms() {
 
 	spawnWolves();
 	spawnFoxes();
+
+	spawnSheep();
+	spawnTortoises();
+	//spawnAntelopes();
 	
 	spawnGrass();
 }
@@ -73,6 +77,22 @@ void GameController::spawnFoxes() {
 	for (int i = 0; i < Fox::INITIAL_QUANTITY; i++) {
 		Fox* fox = new Fox(*world);
 		world->spawnOrganism(fox);
+	}
+}
+
+
+void GameController::spawnSheep() {
+	for (int i = 0; i < Sheep::INITIAL_QUANTITY; i++) {
+		Sheep* sheep = new Sheep(*world);
+		world->spawnOrganism(sheep);
+	}
+}
+
+
+void GameController::spawnTortoises() {
+	for (int i = 0; i < Tortoise::INITIAL_QUANTITY; i++) {
+		Tortoise* tortoise = new Tortoise(*world);
+		world->spawnOrganism(tortoise);
 	}
 }
 
@@ -109,8 +129,6 @@ void GameController::handlePlayerInput() {
 		case ARROW_UP: {
 			world->setPlayerAction(PlayerAction::MOVE_UP);
 			human->setPlayerAction(PlayerAction::MOVE_UP);
-
-			//world->movePlayerUp();
 			break;
 		}
 
@@ -118,8 +136,6 @@ void GameController::handlePlayerInput() {
 		case ARROW_DOWN: {
 			world->setPlayerAction(PlayerAction::MOVE_DOWN);
 			human->setPlayerAction(PlayerAction::MOVE_DOWN);
-
-			//world->movePlayerDown();
 			break;
 		}
 
@@ -127,8 +143,6 @@ void GameController::handlePlayerInput() {
 		case ARROW_LEFT: {
 			world->setPlayerAction(PlayerAction::MOVE_LEFT);
 			human->setPlayerAction(PlayerAction::MOVE_LEFT);
-
-			//world->movePlayerLeft();
 			break;
 		}
 
@@ -136,8 +150,6 @@ void GameController::handlePlayerInput() {
 		case ARROW_RIGHT: {
 			world->setPlayerAction(PlayerAction::MOVE_RIGHT);
 			human->setPlayerAction(PlayerAction::MOVE_RIGHT);
-			
-			//world->movePlayerRight();
 			break;
 		}
 

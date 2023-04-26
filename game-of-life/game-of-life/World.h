@@ -42,11 +42,6 @@ public:
 	void move(Point position, Point destination);
 	void remove(Point position);
 
-	void movePlayerUp();
-	void movePlayerDown();
-	void movePlayerLeft();
-	void movePlayerRight();
-
 	bool isEmpty(Point position);
 	bool isOccupied(Point position);
 	bool isWithinBoardBoundaries(Point position);

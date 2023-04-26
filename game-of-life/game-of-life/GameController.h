@@ -8,6 +8,8 @@
 #include "Human.h"
 #include "Wolf.h"
 #include "Fox.h"
+#include "Sheep.h"
+#include "Tortoise.h"
 #include "Grass.h"
 
 
@@ -31,6 +33,9 @@ public:
 	void createHuman();
 	void spawnWolves();
 	void spawnFoxes();
+	void spawnSheep();
+	void spawnTortoises();
+	//void spawnAntelopes();
 	void spawnGrass();
 
 	void getInputFromPlayer();

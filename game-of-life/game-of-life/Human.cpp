@@ -62,7 +62,6 @@ bool Human::collision(Organism& other) {
 
 
 void Human::draw() {
-	//world.draw(position, symbol);
 }
 
 
@@ -78,28 +77,7 @@ void Human::activateSpecialAbility(SpecialAbility specialAbility) {
 }
 
 
-//void Human::move(const Point& position) {
-//	Animal::move(position);
-//}
-
-
-void Human::kill(Organism& other) {
-	Animal::kill(other);
-}
-
-
 void Human::reproduce(const Point& position) {
-	Animal::reproduce(position);
-}
-
-
-bool Human::canMoveTo(const Point& destination) const {
-	return Animal::canMoveTo(destination);
-}
-
-
-bool Human::canKill(const Organism& other) const {
-	return Animal::canKill(other);
 }
 
 

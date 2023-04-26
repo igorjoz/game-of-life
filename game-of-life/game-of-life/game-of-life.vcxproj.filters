@@ -66,6 +66,15 @@
     <ClCompile Include="Dandelion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Guarana.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Nightshade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PineBorscht.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -117,6 +126,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dandelion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Guarana.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Nightshade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PineBorscht.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

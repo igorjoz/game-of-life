@@ -12,6 +12,7 @@
 #include "Tortoise.h"
 #include "Antelope.h"
 #include "Grass.h"
+#include "Dandelion.h"
 
 
 class GameController
@@ -38,6 +39,7 @@ public:
 	void spawnTortoises();
 	void spawnAntelopes();
 	void spawnGrass();
+	void spawnDandelions();
 
 	void getInputFromPlayer();
 	void handlePlayerInput();

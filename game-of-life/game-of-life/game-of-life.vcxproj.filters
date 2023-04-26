@@ -63,6 +63,9 @@
     <ClCompile Include="Antelope.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Dandelion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Antelope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dandelion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

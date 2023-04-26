@@ -55,6 +55,7 @@ void GameController::spawnInitialOrganisms() {
 	spawnAntelopes();
 	
 	spawnGrass();
+	spawnDandelions();
 }
 
 
@@ -109,6 +110,14 @@ void GameController::spawnGrass() {
 	for (int i = 0; i < Grass::INITIAL_QUANTITY; i++) {
 		Grass* grass = new Grass(*world);
 		world->spawnOrganism(grass);
+	}
+}
+
+
+void GameController::spawnDandelions() {
+	for (int i = 0; i < Dandelion::INITIAL_QUANTITY; i++) {
+		Dandelion* dandelion = new Dandelion(*world);
+		world->spawnOrganism(dandelion);
 	}
 }
 

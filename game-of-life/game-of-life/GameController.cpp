@@ -58,7 +58,7 @@ void GameController::spawnInitialOrganisms() {
 	spawnDandelions();
 	spawnGuarana();
 	spawnNightshade();
-	//spawnPineBorscht();
+	spawnPineBorscht();
 }
 
 
@@ -195,6 +195,20 @@ void GameController::handlePlayerInput() {
 			world->setPlayerAction(PlayerAction::MOVE_RIGHT);
 			human->setPlayerAction(PlayerAction::MOVE_RIGHT);
 			break;
+		}
+
+		case 'e': {
+			world->setPlayerAction(PlayerAction::USE_SPECIAL_ABILITY);
+			human->setPlayerAction(PlayerAction::USE_SPECIAL_ABILITY);
+			break;
+		}
+
+		case 'k': {
+			// save game to file
+		}
+
+		case 'l': {
+			// load game from file
 		}
 
 		default: {

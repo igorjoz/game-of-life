@@ -58,6 +58,13 @@ void World::takeTurn() {
 	sortOrganismsList();
 
 	for (int i = 0; i < organismsList.size(); i++) {
+		// if organism is nullptr, delete it
+		if (organismsList[i] == nullptr) {
+			organismsList.erase(organismsList.begin() + i);
+			i--;
+			continue;
+		}
+		
 		organismsList[i]->action();
 	}
 }
@@ -229,8 +236,10 @@ void World::addTurnSummaryMessage(const std::string& message) {
 
 
 void World::printTurnSummaryMessages() {
-	for (auto message : turnSummaryMessages) {
-		std::cout << message << "\n";
+	int messagesToPrint = turnSummaryMessages.size() > 10 ? 10 : turnSummaryMessages.size();
+	
+	for (int i = 0; i < messagesToPrint; i++) {
+		std::cout << turnSummaryMessages[i] << "\n";
 	}
 
 	turnSummaryMessages.clear();

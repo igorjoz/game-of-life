@@ -14,6 +14,7 @@ protected:
 	int initiative;
 	int age;
 	char symbol;
+	bool isAnimal;
 	Point position;
 	World& world;
 
@@ -42,6 +43,7 @@ public:
 	int getInitiative() const;
 	int getAge() const;
 	char getSymbol() const;
+	bool getIsAnimal() const;
 	Point& getPosition();
 	int getX() const;
 	int getY() const;

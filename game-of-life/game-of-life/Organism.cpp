@@ -6,6 +6,7 @@ Organism::Organism(World& world) :
 	initiative{ 0 },
 	age{ 0 },
 	symbol{ 'N' },
+	isAnimal{ false },
 	position{ Point(0, 0) },
 	world(world) {
 }
@@ -16,6 +17,7 @@ Organism::Organism(int strength, int initiative, char symbol, Point position, Wo
 	initiative{ initiative },
 	age{ 0 },
 	symbol{ symbol },
+	isAnimal { false },
 	position{ position },
 	world{ world } {
 }
@@ -26,6 +28,7 @@ Organism::Organism(int strength, int initiative, int age, char symbol, Point pos
 	initiative{ initiative },
 	age{ age },
 	symbol{ symbol },
+	isAnimal{ false },
 	position{ position },
 	world{ world } {
 }
@@ -36,6 +39,7 @@ Organism::Organism(int strength, int initiative, char symbol, World& world) :
 	initiative{ initiative },
 	age{ 0 },
 	symbol{ symbol },
+	isAnimal{ false },
 	position{ Point(0, 0) },
 	world{ world } {
 }
@@ -78,6 +82,11 @@ int Organism::getAge() const {
 
 char Organism::getSymbol() const {
 	return symbol;
+}
+
+
+bool Organism::getIsAnimal() const {
+	return isAnimal;
 }
 
 

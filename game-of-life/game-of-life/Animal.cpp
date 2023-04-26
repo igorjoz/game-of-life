@@ -3,11 +3,12 @@
 
 Animal::Animal(int strength, int initiative, char symbol, const Point& position, World& world) :
 	Organism(strength, initiative, symbol, position, world) {
+	isAnimal = true;
 }
 
 
-Animal::Animal(int strength, int initiative, char symbol, World& world) :
-	Organism(strength, initiative, symbol, world) {
+Animal::Animal(int strength, int initiative, char symbol, World& world) : Organism(strength, initiative, symbol, world) {
+	isAnimal = true;
 }
 
 

@@ -118,6 +118,11 @@ void World::move(Point position, Point destination) {
 	
 	organisms[destination.x][destination.y] = organisms[position.x][position.y];
 	organisms[position.x][position.y] = nullptr;
+
+	if (organisms[destination.x][destination.y]->getPosition() == Point(-1, -1)) {
+		delete organisms[destination.x][destination.y];
+		organisms[destination.x][destination.y] = nullptr;
+	}
 }
 
 

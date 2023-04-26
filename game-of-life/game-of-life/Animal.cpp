@@ -28,7 +28,6 @@ void Animal::action() {
 		return;
 	}
 
-
 	if (world.isOccupied(destination)) {
 		Organism* other = world.getOrganismAt(destination);
 
@@ -43,9 +42,9 @@ bool Animal::collision(Organism& other) {
 		
 		return true;
 	}
-	else {
+	//else {
 		other.collision(*this);
-	}
+	//}
 
 	if (canReproduce(other, position)) {
 		reproduce(position);

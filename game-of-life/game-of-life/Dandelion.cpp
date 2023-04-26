@@ -26,5 +26,5 @@ void Dandelion::reproduce(const Point& position) {
 
 
 bool Dandelion::canReproduceThisTurn() const {
-	return (rand() % 24 == 0);
+	return (rand() % 32 == 0);
 }
